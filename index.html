@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Incoterms 2020 - BTS Commerce International</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+            text-align: center;
+            border: 2px solid #ff8c42;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            color: #2d2d2d;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            background: #2d2d2d;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid #ff6b35;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff6b35;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .game-card {
+            background: #2d2d2d;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            border: 2px solid #ff6b35;
+        }
+
+        .situation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        .situation-number {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .question-text {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.05em;
+            border-left: 4px solid #ff6b35;
+            color: #fff;
+        }
+
+        .role-indicator {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .role-export {
+            background: #ff6b35;
+            color: #1a1a1a;
+        }
+
+        .role-import {
+            background: #ff8c42;
+            color: #1a1a1a;
+        }
+
+        .input-section {
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #ff8c42;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff8c42;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #ff8c42 0%, #ffad5a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .btn-help {
+            background: #ffc107;
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-help:hover {
+            background: #ffcd38;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-next {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-next:hover {
+            background: #34ce57;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-restart:hover {
+            background: linear-gradient(135deg, #ff8c42 0%, #ffad5a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .feedback {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback-correct {
+            background: #1a4d2e;
+            border: 2px solid #28a745;
+            color: #90ee90;
+        }
+
+        .feedback-incorrect {
+            background: #4d1a1a;
+            border: 2px solid #dc3545;
+            color: #ffb3b3;
+        }
+
+        .feedback-help {
+            background: #4d3d1a;
+            border: 2px solid #ffc107;
+            color: #ffe066;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .explanation {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .explanation strong {
+            color: #ff8c42;
+        }
+
+        .help-content {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .help-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .help-content li {
+            margin-bottom: 8px;
+        }
+
+        .final-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .final-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #ff6b35;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .performance-message {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #ddd;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 5em;
+            margin: 20px 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff6b35;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .stat-label {
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .score-board {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Jeu Incoterms 2020</h1>
+            <p class="subtitle">BTS Commerce International - Maîtrisez les Incoterms !</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Score</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Question</div>
+                <div class="score-value"><span id="current-question">1</span>/<span id="total-questions">18</span></div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Bonnes réponses</div>
+                <div class="score-value" id="correct-count">0</div>
+            </div>
+        </div>
+
+        <div class="game-card" id="game-area">
+            <div class="situation-header">
+                <div class="situation-number">Situation <span id="question-num">1</span></div>
+            </div>
+
+            <div id="role-indicator"></div>
+            <div class="question-text" id="question-text"></div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="incoterm-select">Incoterm à utiliser :</label>
+                    <select id="incoterm-select">
+                        <option value="">-- Sélectionnez un Incoterm --</option>
+                        <option value="EXW">EXW - Ex Works</option>
+                        <option value="FCA">FCA - Free Carrier</option>
+                        <option value="CPT">CPT - Carriage Paid To</option>
+                        <option value="CIP">CIP - Carriage and Insurance Paid To</option>
+                        <option value="DAP">DAP - Delivered At Place</option>
+                        <option value="DPU">DPU - Delivered at Place Unloaded</option>
+                        <option value="DDP">DDP - Delivered Duty Paid</option>
+                        <option value="FAS">FAS - Free Alongside Ship</option>
+                        <option value="FOB">FOB - Free On Board</option>
+                        <option value="CFR">CFR - Cost and Freight</option>
+                        <option value="CIF">CIF - Cost Insurance and Freight</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="city-input">Ville (lieu de transfert) :</label>
+                    <input type="text" id="city-input" placeholder="Ex: Montréal, Paris, Londres...">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-submit" id="submit-btn" onclick="checkAnswer()">Valider ma réponse</button>
+                <button class="btn-help" id="help-btn" onclick="showHelp()">💡 Aide (-2 points)</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="button-group" id="next-button-container" style="display: none;">
+                <button class="btn-next" onclick="nextQuestion()">Question suivante →</button>
+            </div>
+        </div>
+
+        <div class="game-card hidden" id="final-screen">
+            <div class="final-screen">
+                <h2>🎉 Félicitations !</h2>
+                <p>Vous avez terminé le jeu !</p>
+                <div class="final-score" id="final-score">0</div>
+                <div class="badge" id="badge"></div>
+                <div class="performance-message" id="performance-message"></div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="final-correct">0</div>
+                        <div class="stat-label">Bonnes réponses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="final-incorrect">0</div>
+                        <div class="stat-label">Erreurs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="final-help">0</div>
+                        <div class="stat-label">Aides utilisées</div>
+                    </div>
+                </div>
+
+                <button class="btn-restart" onclick="restartGame()">🔄 Recommencer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données du jeu - Situations d'Incoterms
+        const situations = [
+            {
+                text: "Vous exportez du linge de maison au Canada. Votre client vous demande d'organiser la logistique à vos frais jusqu'à l'aéroport de Montréal mais accepte le transfert de risques dès le départ du transport principal.",
+                incoterm: "CPT",
+                city: "Montréal",
+                role: "export",
+                explanation: "Le client demande que vous organisiez le transport jusqu'à Montréal (donc vous payez le transport principal) ET qu'il accepte les risques dès le départ. Il s'agit du transport aérien multimodal. Aucune assurance n'est mentionnée, c'est donc CPT (Carriage Paid To) et non CIP.",
+                hints: [
+                    "Le client veut que vous payiez le transport jusqu'à destination",
+                    "Le transfert de risques se fait au départ du transport principal",
+                    "C'est du transport aérien multimodal",
+                    "Aucune assurance n'est demandée"
+                ]
+            },
+            {
+                text: "Vous importez du café du Brésil par navire à destination de Nantes. Vous souhaitez uniquement gérer le transport de la marchandise de l'entrepôt de votre transitaire localisé à Nantes à votre entrepôt personnel, après avoir dédouané la marchandise vous-même et payé les droits de douane.",
+                incoterm: "DAP",
+                city: "Nantes",
+                role: "import",
+                explanation: "Le vendeur livre la marchandise à Nantes, prête à être déchargée. Vous gérez uniquement le post-acheminement local et le dédouanement import. C'est l'incoterm DAP (Delivered At Place).",
+                hints: [
+                    "Le vendeur livre à destination",
+                    "Vous ne gérez que le transport local final",
+                    "Le vendeur prend les risques jusqu'à Nantes",
+                    "L'incoterm commence par la lettre D"
+                ]
+            },
+            {
+                text: "Vous achetez des pièces automobiles en Allemagne et prenez la logistique en charge, depuis les locaux de votre fournisseur, à Karlsruhe.",
+                incoterm: "EXW",
+                city: "Karlsruhe",
+                role: "import",
+                explanation: "Vous prenez en charge toute la logistique depuis les locaux du fournisseur. C'est l'obligation minimale du vendeur : EXW (Ex Works).",
+                hints: [
+                    "Vous gérez tout depuis l'usine du fournisseur",
+                    "Le vendeur a l'obligation minimale",
+                    "Le transfert se fait dans les locaux du vendeur",
+                    "C'est l'incoterm avec le moins d'obligations pour le vendeur"
+                ]
+            },
+            {
+                text: "Vous exportez, votre client sénégalais vous demande d'organiser le transport maritime jusqu'au port de Dakar et de souscrire une assurance pour son compte. Il accepte le transfert de risque depuis le départ du transport principal.",
+                incoterm: "CIP",
+                city: "Dakar",
+                role: "export",
+                explanation: "Transport maritime avec marchandise conteneurisée, vous organisez jusqu'à Dakar, vous prenez l'assurance, mais le transfert de risques se fait au départ. C'est CIP (Carriage and Insurance Paid to) car l'assurance est demandée et le transport est multimodal.",
+                hints: [
+                    "Le client demande une assurance",
+                    "Vous organisez et payez le transport jusqu'à destination",
+                    "Le transfert de risques se fait au départ",
+                    "C'est un incoterm de la famille 'C' avec assurance"
+                ]
+            },
+            {
+                text: "Vous exportez des tôles en vrac par voie maritime à destination d'Alger (Algérie). Vous voulez bien conclure le contrat de transport principal et assumer les frais mais sans autre démarche.",
+                incoterm: "CFR",
+                city: "Alger",
+                role: "export",
+                explanation: "Transport maritime de marchandises en vrac, vous payez le transport jusqu'à Alger mais sans assurance ni risques au-delà du départ. C'est CFR (Cost and Freight), exclusivement maritime pour marchandises non conteneurisées.",
+                hints: [
+                    "C'est du transport maritime en vrac",
+                    "Vous payez le transport mais pas l'assurance",
+                    "Le transfert de risques se fait au départ",
+                    "C'est un incoterm exclusivement maritime de la famille 'C'"
+                ]
+            },
+            {
+                text: "Vous importez et récupérez vos marchandises non assurées et non conteneurisées, au port d'Anvers, en Belgique, et en organisez le déchargement et le post-acheminement par route jusqu'à vos locaux, à Lille.",
+                incoterm: "CFR",
+                city: "Anvers",
+                role: "import",
+                explanation: "Marchandises maritimes non conteneurisées et non assurées livrées au port d'Anvers. Le vendeur a payé le transport maritime. C'est CFR (Cost and Freight).",
+                hints: [
+                    "Marchandises non conteneurisées et non assurées",
+                    "Transport maritime uniquement",
+                    "Le vendeur a payé le fret jusqu'au port de destination",
+                    "C'est un incoterm maritime de la famille 'C' sans assurance"
+                ]
+            },
+            {
+                text: "Vous exportez un conteneur complet de marchandises par la voie maritime. Votre client prendra en charge la logistique depuis le port de Fos-Marseille. La marchandise sera prise en charge dans le camion de pré-acheminement. Vous avez réalisé le dédouanement export.",
+                incoterm: "FCA",
+                city: "Fos-Marseille",
+                role: "export",
+                explanation: "Vous livrez la marchandise conteneurisée au transporteur désigné par l'acheteur au port de Fos-Marseille après dédouanement export. C'est FCA (Free Carrier).",
+                hints: [
+                    "Vous livrez au transporteur du client",
+                    "Le transfert se fait lors de la remise au transporteur",
+                    "Vous faites le dédouanement export",
+                    "C'est un incoterm de la famille 'F'"
+                ]
+            },
+            {
+                text: "Votre fournisseur a organisé le transport de vos marchandises, à vos risques, jusqu'à l'aéroport de Lyon. Vous importez.",
+                incoterm: "CPT",
+                city: "Lyon",
+                role: "import",
+                explanation: "Le vendeur a payé le transport jusqu'à Lyon mais vous assumez les risques depuis le départ. Sans mention d'assurance, c'est CPT (Carriage Paid To).",
+                hints: [
+                    "Le vendeur paie le transport jusqu'à destination",
+                    "Vous assumez les risques depuis le départ",
+                    "Pas d'assurance mentionnée",
+                    "C'est un incoterm multimodal de la famille 'C'"
+                ]
+            },
+            {
+                text: "Votre entreprise se trouve à Montpellier, vous chargez la marchandise emballée dans le camion du transporteur routier désigné par votre client britannique après avoir réalisé le dédouanement export.",
+                incoterm: "FCA",
+                city: "Montpellier",
+                role: "export",
+                explanation: "Vous remettez la marchandise au transporteur du client à Montpellier après dédouanement export. C'est FCA (Free Carrier).",
+                hints: [
+                    "Vous remettez au transporteur du client",
+                    "Le transfert se fait dans vos locaux/ville",
+                    "Vous gérez le dédouanement export",
+                    "C'est un incoterm de la famille 'F'"
+                ]
+            },
+            {
+                text: "Vous importez de Chine des moteurs emballés dans des caisses en bois conteneurisées par bateau à destination de Tours. Port de débarquement : Le Havre. L'exportateur doit conclure le contrat de transport, assurance comprise, c'est vous qui assumez les risques depuis le port de départ.",
+                incoterm: "CIP",
+                city: "Le Havre",
+                role: "import",
+                explanation: "Transport maritime avec marchandise conteneurisée, le vendeur paie transport et assurance jusqu'au Havre, mais vous assumez les risques dès le départ en Chine. C'est CIP (Carriage and Insurance Paid to).",
+                hints: [
+                    "Marchandise conteneurisée en transport maritime",
+                    "Le vendeur paie transport ET assurance",
+                    "Vous assumez les risques dès le départ",
+                    "C'est un incoterm multimodal de la famille 'C' avec assurance"
+                ]
+            },
+            {
+                text: "Vous livrez un client en Suède et organisez toute la logistique, à vos risques, par avion puis par route, jusqu'à ses locaux à Malmö. La marchandise est prise en charge encore chargée dans le camion.",
+                incoterm: "DAP",
+                city: "Malmö",
+                role: "export",
+                explanation: "Vous organisez et payez tout le transport jusqu'aux locaux du client à Malmö et assumez tous les risques. La marchandise est livrée chargée dans le camion. C'est DAP (Delivered At Place).",
+                hints: [
+                    "Vous gérez tout jusqu'à destination",
+                    "Vous assumez tous les risques",
+                    "Livraison aux locaux du client",
+                    "C'est un incoterm de la famille 'D'"
+                ]
+            },
+            {
+                text: "Vous exportez par bateau de la marchandise à destination de Saïgon (Viêt-Nam). Votre client vous demande simplement d'assurer le pré-acheminement de la marchandise jusqu'au quai d'embarquement au port de Marseille, ainsi que le dédouanement export.",
+                incoterm: "FAS",
+                city: "Marseille",
+                role: "export",
+                explanation: "Vous livrez la marchandise le long du navire au port de Marseille après dédouanement export. C'est FAS (Free Alongside Ship), un incoterm exclusivement maritime.",
+                hints: [
+                    "Livraison le long du navire",
+                    "Transport maritime uniquement",
+                    "Vous gérez jusqu'au quai d'embarquement",
+                    "C'est un incoterm maritime de la famille 'F'"
+                ]
+            },
+            // NOUVELLES SITUATIONS ENRICHIES
+            {
+                text: "Vous exportez des machines-outils par bateau vers le Mexique. Votre client mexicain prend en charge le transport maritime et l'assurance dès que la marchandise est chargée sur le navire au port de Marseille. Vous gérez le pré-acheminement et le dédouanement export.",
+                incoterm: "FOB",
+                city: "Marseille",
+                role: "export",
+                explanation: "Le transfert des risques et des frais se fait dès que la marchandise est chargée sur le bateau au port de Marseille. C'est FOB (Free On Board), un incoterm exclusivement maritime.",
+                hints: [
+                    "Transport maritime uniquement",
+                    "Le transfert se fait au chargement sur le navire",
+                    "Port dans le pays de l'exportateur",
+                    "C'est un incoterm de la famille 'F' maritime"
+                ]
+            },
+            {
+                text: "Vous exportez du matériel agricole lourd vers la Pologne. Votre client vous demande de livrer l'équipement à son entrepôt à Varsovie et de le décharger vous-même avec votre grue car il n'a pas l'équipement nécessaire. Vous organisez tout le transport et assumez tous les risques jusqu'au déchargement.",
+                incoterm: "DPU",
+                city: "Varsovie",
+                role: "export",
+                explanation: "Vous livrez à destination ET vous déchargez la marchandise. DPU (Delivered at Place Unloaded) est le seul incoterm où le vendeur a l'obligation de décharger la marchandise au lieu de destination.",
+                hints: [
+                    "Vous livrez à destination",
+                    "Vous devez décharger la marchandise",
+                    "C'est le seul incoterm avec obligation de déchargement pour le vendeur",
+                    "C'est un incoterm de la famille 'D'"
+                ]
+            },
+            {
+                text: "Vous exportez des produits cosmétiques vers la Suisse. Votre client suisse vous demande de livrer la marchandise directement à son magasin à Genève, de gérer vous-même le dédouanement import suisse et de payer les droits de douane et la TVA. Il prendra en charge uniquement le déchargement.",
+                incoterm: "DDP",
+                city: "Genève",
+                role: "export",
+                explanation: "Vous livrez à destination et gérez le dédouanement import ainsi que le paiement des droits et taxes. C'est DDP (Delivered Duty Paid), l'incoterm avec le maximum d'obligations pour le vendeur.",
+                hints: [
+                    "Vous livrez à destination",
+                    "Vous gérez le dédouanement import",
+                    "Vous payez les droits de douane et taxes",
+                    "C'est l'incoterm avec le plus d'obligations pour le vendeur"
+                ]
+            },
+            {
+                text: "Vous exportez du minerai de fer en vrac par bateau vers la Chine. Votre client chinois vous demande d'organiser le transport maritime jusqu'au port de Shanghai et de souscrire une assurance pour son compte. Le transfert de risques se fait dès le chargement de la marchandise sur le navire à Marseille.",
+                incoterm: "CIF",
+                city: "Shanghai",
+                role: "export",
+                explanation: "Marchandise en vrac (non conteneurisée) en transport maritime, vous organisez le transport et l'assurance, mais le transfert de risques se fait au port de départ. C'est CIF (Cost Insurance Freight), exclusivement maritime pour marchandises en vrac ou non conteneurisées.",
+                hints: [
+                    "Marchandise en vrac (non conteneurisée)",
+                    "Transport maritime exclusivement",
+                    "Vous devez souscrire une assurance",
+                    "Le transfert de risques se fait au port de départ"
+                ]
+            },
+            {
+                text: "Vous importez du café en grains du Vietnam par bateau. Votre fournisseur organise le transport maritime non conteneurisé jusqu'au port du Havre et souscrit une assurance pour votre compte. Vous assumez les risques dès le port de départ au Vietnam. Vous gérez le déchargement et le post-acheminement.",
+                incoterm: "CIF",
+                city: "Le Havre",
+                role: "import",
+                explanation: "Transport maritime de marchandise non conteneurisée avec assurance souscrite par le vendeur, mais vous assumez les risques depuis le port de départ. C'est CIF (Cost Insurance Freight).",
+                hints: [
+                    "Marchandise non conteneurisée",
+                    "Transport maritime avec assurance",
+                    "Vous assumez les risques depuis le départ",
+                    "C'est un incoterm maritime de la famille 'C' avec assurance"
+                ]
+            },
+            {
+                text: "Vous importez des smartphones de Corée du Sud. Le fournisseur livre la marchandise dans votre entrepôt à Lyon, la décharge lui-même et assume tous les risques jusqu'au déchargement complet. Vous gérez uniquement le dédouanement import.",
+                incoterm: "DPU",
+                city: "Lyon",
+                role: "import",
+                explanation: "Le vendeur livre à destination, décharge la marchandise et assume les risques jusqu'au déchargement. C'est DPU (Delivered at Place Unloaded).",
+                hints: [
+                    "Le vendeur livre à destination",
+                    "Il décharge la marchandise",
+                    "Vous ne gérez que le dédouanement import",
+                    "C'est le seul incoterm où le vendeur décharge"
+                ]
+            },
+            {
+                text: "Vous exportez des composants électroniques par bateau vers Singapour. Votre client asiatique organise lui-même le transport maritime principal. Vous vous chargez uniquement de livrer la marchandise chargée sur le navire au port de Marseille après avoir effectué le dédouanement export.",
+                incoterm: "FOB",
+                city: "Marseille",
+                role: "export",
+                explanation: "Vous livrez la marchandise chargée sur le navire au port de Marseille. Le transfert de risques et de frais se fait à ce moment. C'est FOB (Free On Board), exclusivement maritime.",
+                hints: [
+                    "Transport maritime",
+                    "Vous livrez sur le navire",
+                    "Le client gère le transport maritime principal",
+                    "Le transfert se fait au chargement sur le navire"
+                ]
+            },
+            {
+                text: "Vous importez des meubles d'Italie. Votre fournisseur italien livre les marchandises directement dans votre magasin à Nice, gère le dédouanement import en France et paie tous les droits de douane. Vous n'avez qu'à décharger les meubles du camion.",
+                incoterm: "DDP",
+                city: "Nice",
+                role: "import",
+                explanation: "Le vendeur livre à destination, gère le dédouanement import et paie les droits. C'est l'obligation maximale pour le vendeur : DDP (Delivered Duty Paid).",
+                hints: [
+                    "Le vendeur livre à destination",
+                    "Il gère le dédouanement import",
+                    "Il paie les droits et taxes",
+                    "Vous n'avez qu'à décharger"
+                ]
+            },
+            {
+                text: "Votre entreprise à Lille exporte des textiles vers le Royaume-Uni. Le transporteur désigné par votre client britannique vient récupérer un conteneur complet dans vos locaux. Vous chargez le conteneur dans son camion et effectuez les formalités de dédouanement export.",
+                incoterm: "FCA",
+                city: "Lille",
+                role: "export",
+                explanation: "Vous remettez le conteneur au transporteur du client dans vos locaux à Lille après dédouanement export. C'est FCA (Free Carrier).",
+                hints: [
+                    "Le transporteur est désigné par le client",
+                    "Vous remettez dans vos locaux",
+                    "Vous faites le dédouanement export",
+                    "C'est un incoterm de la famille 'F'"
+                ]
+            },
+            {
+                text: "Vous exportez des céréales en vrac par navire vers le Maroc. Vous organisez le transport maritime jusqu'au port de Casablanca mais votre client marocain assume les risques dès le chargement sur le navire en France et gère lui-même son assurance.",
+                incoterm: "CFR",
+                city: "Casablanca",
+                role: "export",
+                explanation: "Marchandise en vrac (non conteneurisée), transport maritime, vous payez le fret mais pas l'assurance, et le client assume les risques dès le départ. C'est CFR (Cost and Freight).",
+                hints: [
+                    "Marchandise en vrac",
+                    "Transport maritime exclusivement",
+                    "Vous payez le fret mais pas l'assurance",
+                    "Le transfert de risques se fait au port de départ"
+                ]
+            },
+            {
+                text: "Vous achetez du matériel informatique d'un fournisseur allemand à Munich. Vous envoyez votre propre transporteur récupérer la marchandise directement dans l'usine du fournisseur. Le fournisseur met simplement la marchandise à disposition, vous gérez tout le reste y compris le chargement.",
+                incoterm: "EXW",
+                city: "Munich",
+                role: "import",
+                explanation: "Vous prenez en charge absolument tout depuis l'usine du fournisseur, y compris le chargement. C'est EXW (Ex Works), l'incoterm avec le minimum d'obligations pour le vendeur.",
+                hints: [
+                    "Vous gérez tout depuis l'usine",
+                    "Le vendeur met juste à disposition",
+                    "Vous gérez même le chargement",
+                    "C'est l'incoterm avec le moins d'obligations pour le vendeur"
+                ]
+            },
+            {
+                text: "Vous exportez des vins de Bordeaux vers les États-Unis par conteneur maritime. Votre client américain vous demande d'organiser le transport jusqu'au port de New York et de souscrire une assurance maritime pour son compte. Il accepte d'assumer les risques dès le départ de France.",
+                incoterm: "CIP",
+                city: "New York",
+                role: "export",
+                explanation: "Transport maritime avec marchandise conteneurisée (vin en conteneur), vous organisez le transport et l'assurance, mais le transfert de risques se fait au départ. C'est CIP car conteneurisé et avec assurance demandée.",
+                hints: [
+                    "Marchandise conteneurisée en maritime",
+                    "Assurance demandée par le client",
+                    "Vous organisez et payez le transport principal",
+                    "Le transfert de risques se fait au départ"
+                ]
+            },
+            {
+                text: "Vous exportez des équipements électroniques conteneurisés par voie maritime vers Tokyo (Japon). Votre client japonais souhaite que vous organisiez le transport jusqu'au port de Tokyo et que vous souscriviez une assurance pour son compte, mais il accepte d'assumer les risques dès le départ du navire en France.",
+                incoterm: "CIP",
+                city: "Tokyo",
+                role: "export",
+                explanation: "Transport maritime avec marchandise conteneurisée, vous organisez et payez le transport jusqu'à Tokyo et souscrivez l'assurance, mais le transfert de risques se fait au départ du transport principal. C'est CIP car c'est conteneurisé et l'assurance est demandée.",
+                hints: [
+                    "Marchandise conteneurisée",
+                    "Assurance demandée par le client",
+                    "Vous payez le transport jusqu'à destination",
+                    "Le transfert de risques se fait au départ du transport principal"
+                ]
+            },
+            {
+                text: "Votre entreprise basée à Bordeaux importe du vin argentin. Le fournisseur organise et paie le transport aérien jusqu'à l'aéroport de Paris-CDG, mais vous assumez tous les risques depuis Buenos Aires. Aucune assurance n'est souscrite par le vendeur.",
+                incoterm: "CPT",
+                city: "Paris-CDG",
+                role: "import",
+                explanation: "Le vendeur paie le transport aérien jusqu'à Paris-CDG mais vous assumez les risques depuis le départ. Sans assurance demandée, c'est CPT (Carriage Paid To), un incoterm multimodal.",
+                hints: [
+                    "Transport aérien (multimodal)",
+                    "Le vendeur paie le transport jusqu'à destination",
+                    "Vous assumez les risques depuis le départ",
+                    "Pas d'assurance souscrite par le vendeur"
+                ]
+            },
+            {
+                text: "Vous importez du textile du Bangladesh. Votre fournisseur vous livre la marchandise non conteneurisée par bateau au port du Havre. Il a organisé et payé le transport maritime mais n'a pas souscrit d'assurance. Vous gérez le déchargement et le post-acheminement vers vos entrepôts à Rouen.",
+                incoterm: "CFR",
+                city: "Le Havre",
+                role: "import",
+                explanation: "Marchandise non conteneurisée en transport maritime, le vendeur a payé le fret jusqu'au Havre mais sans assurance. C'est CFR (Cost and Freight), exclusivement maritime pour marchandises en vrac ou non conteneurisées.",
+                hints: [
+                    "Marchandise non conteneurisée",
+                    "Transport maritime uniquement",
+                    "Le vendeur a payé le fret maritime",
+                    "Pas d'assurance souscrite"
+                ]
+            },
+            {
+                text: "Vous exportez des machines industrielles vers le Maroc. Votre client marocain prend en charge toute la logistique depuis vos locaux à Lyon. Il envoie son propre transporteur récupérer la marchandise. Vous n'effectuez même pas le chargement sur le camion.",
+                incoterm: "EXW",
+                city: "Lyon",
+                role: "export",
+                explanation: "Le client gère absolument tout depuis vos locaux à Lyon, vous n'effectuez même pas le chargement. C'est l'obligation minimale du vendeur : EXW (Ex Works).",
+                hints: [
+                    "Le client gère tout depuis vos locaux",
+                    "Vous n'avez aucune obligation de chargement",
+                    "C'est l'incoterm avec le minimum d'obligations pour le vendeur",
+                    "Le transfert se fait dans vos locaux"
+                ]
+            },
+            {
+                text: "Vous exportez des pièces détachées automobiles par transport routier vers l'Espagne. Votre client espagnol a désigné un transporteur qui vient récupérer la marchandise dans vos locaux à Toulouse. Vous chargez les marchandises dans son camion et effectuez le dédouanement export.",
+                incoterm: "FCA",
+                city: "Toulouse",
+                role: "export",
+                explanation: "Vous remettez la marchandise au transporteur désigné par le client à Toulouse, après l'avoir chargée et dédouanée à l'export. C'est FCA (Free Carrier).",
+                hints: [
+                    "Vous remettez au transporteur du client",
+                    "Vous effectuez le chargement et le dédouanement export",
+                    "Le transfert se fait lors de la remise au transporteur",
+                    "C'est un incoterm de la famille 'F'"
+                ]
+            },
+            {
+                text: "Vous exportez des céréales en vrac par bateau vers l'Égypte. Vous organisez le transport maritime jusqu'au port d'Alexandrie et en assumez les coûts, mais votre client égyptien assume les risques dès que la marchandise est chargée sur le navire en France. Vous ne souscrivez pas d'assurance.",
+                incoterm: "CFR",
+                city: "Alexandrie",
+                role: "export",
+                explanation: "Marchandise en vrac (non conteneurisée) en transport maritime, vous payez le fret jusqu'à Alexandrie mais le client assume les risques dès le chargement sur le navire. Sans assurance, c'est CFR (Cost and Freight).",
+                hints: [
+                    "Marchandise en vrac (non conteneurisée)",
+                    "Transport maritime exclusivement",
+                    "Vous payez le fret mais pas l'assurance",
+                    "Le transfert de risques se fait au chargement sur le navire"
+                ]
+            },
+            {
+                text: "Vous importez des meubles de Pologne par transport routier. Votre fournisseur polonais livre la marchandise directement dans votre entrepôt à Strasbourg, prête à être déchargée. Il assume tous les risques et coûts jusqu'à ce point, mais vous gérez le dédouanement import et payez les droits de douane.",
+                incoterm: "DAP",
+                city: "Strasbourg",
+                role: "import",
+                explanation: "Le vendeur livre à destination (Strasbourg), prêt à être déchargé, et assume tous les risques et coûts jusqu'à ce point. Vous gérez le dédouanement import. C'est DAP (Delivered At Place).",
+                hints: [
+                    "Le vendeur livre à destination",
+                    "Il assume tous les risques jusqu'à votre entrepôt",
+                    "Vous ne gérez que le dédouanement import",
+                    "C'est un incoterm de la famille 'D'"
+                ]
+            },
+            {
+                text: "Vous exportez des produits chimiques conteneurisés par bateau vers le Brésil. Votre client brésilien vous demande d'organiser le transport maritime jusqu'au port de Santos et de souscrire une assurance pour son compte. Il accepte que les risques soient transférés dès le chargement du conteneur sur le navire en France.",
+                incoterm: "CIP",
+                city: "Santos",
+                role: "export",
+                explanation: "Transport maritime avec marchandise conteneurisée, vous organisez le transport jusqu'à Santos et souscrivez l'assurance pour le client, mais le transfert de risques se fait au départ du transport principal. C'est CIP (Carriage and Insurance Paid to) car conteneurisé et avec assurance.",
+                hints: [
+                    "Marchandise conteneurisée en maritime",
+                    "Assurance souscrite pour le compte du client",
+                    "Vous organisez et payez le transport principal",
+                    "Le transfert de risques se fait au départ"
+                ]
+            }
+        ];
+
+        // Variables de jeu
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let helpUsed = 0;
+        let shuffledQuestions = [];
+        let helpShown = false;
+
+        // Initialisation du jeu
+        function initGame() {
+            // Mélanger les questions
+            shuffledQuestions = [...situations].sort(() => Math.random() - 0.5);
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            helpUsed = 0;
+            
+            document.getElementById('total-questions').textContent = shuffledQuestions.length;
+            loadQuestion();
+        }
+
+        // Charger une question
+        function loadQuestion() {
+            helpShown = false;
+            const situation = shuffledQuestions[currentQuestionIndex];
+            
+            document.getElementById('question-num').textContent = currentQuestionIndex + 1;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('question-text').textContent = situation.text;
+            
+            // Afficher le rôle (import/export)
+            const roleDiv = document.getElementById('role-indicator');
+            if (situation.role === 'export') {
+                roleDiv.innerHTML = '<span class="role-indicator role-export">👉 Vous êtes EXPORTATEUR</span>';
+            } else {
+                roleDiv.innerHTML = '<span class="role-indicator role-import">👉 Vous êtes IMPORTATEUR</span>';
+            }
+            
+            // Réinitialiser les champs
+            document.getElementById('incoterm-select').value = '';
+            document.getElementById('city-input').value = '';
+            document.getElementById('feedback').classList.remove('show');
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('next-button-container').style.display = 'none';
+            document.getElementById('submit-btn').disabled = false;
+            document.getElementById('help-btn').disabled = false;
+        }
+
+        // Normaliser une chaîne (enlever accents, espaces, casse)
+        function normalizeString(str) {
+            return str.toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]/g, '');
+        }
+
+        // Vérifier la réponse
+        function checkAnswer() {
+            const situation = shuffledQuestions[currentQuestionIndex];
+            const selectedIncoterm = document.getElementById('incoterm-select').value;
+            const enteredCity = document.getElementById('city-input').value.trim();
+            
+            if (!selectedIncoterm || !enteredCity) {
+                alert('⚠️ Veuillez sélectionner un Incoterm et entrer une ville !');
+                return;
+            }
+            
+            const feedbackDiv = document.getElementById('feedback');
+            const normalizedEnteredCity = normalizeString(enteredCity);
+            const normalizedCorrectCity = normalizeString(situation.city);
+            
+            const incotermCorrect = selectedIncoterm === situation.incoterm;
+            const cityCorrect = normalizedEnteredCity === normalizedCorrectCity;
+            
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('help-btn').disabled = true;
+            
+            if (incotermCorrect && cityCorrect) {
+                // Réponse correcte
+                const points = helpShown ? 3 : 5;
+                score += points;
+                correctAnswers++;
+                
+                feedbackDiv.className = 'feedback feedback-correct show';
+                feedbackDiv.innerHTML = `
+                    <div class="feedback-title">✅ Excellente réponse !</div>
+                    <p>Vous avez gagné <strong>${points} points</strong> !</p>
+                    <div class="explanation">
+                        <strong>Explication :</strong><br>
+                        ${situation.explanation}
+                    </div>
+                `;
+            } else {
+                // Réponse incorrecte
+                score -= 3;
+                incorrectAnswers++;
+                
+                let errorMsg = '';
+                if (!incotermCorrect && !cityCorrect) {
+                    errorMsg = `L'Incoterm correct est <strong>${situation.incoterm}</strong> et la ville est <strong>${situation.city}</strong>.`;
+                } else if (!incotermCorrect) {
+                    errorMsg = `La ville est correcte mais l'Incoterm correct est <strong>${situation.incoterm}</strong>.`;
+                } else {
+                    errorMsg = `L'Incoterm est correct mais la ville correcte est <strong>${situation.city}</strong>.`;
+                }
+                
+                feedbackDiv.className = 'feedback feedback-incorrect show';
+                feedbackDiv.innerHTML = `
+                    <div class="feedback-title">❌ Réponse incorrecte</div>
+                    <p>Vous perdez <strong>3 points</strong>.</p>
+                    <p>${errorMsg}</p>
+                    <div class="explanation">
+                        <strong>Explication :</strong><br>
+                        ${situation.explanation}
+                    </div>
+                `;
+            }
+            
+            updateScoreDisplay();
+            document.getElementById('next-button-container').style.display = 'block';
+        }
+
+        // Afficher l'aide
+        function showHelp() {
+            helpShown = true;
+            helpUsed++;
+            score -= 2;
+            
+            const situation = shuffledQuestions[currentQuestionIndex];
+            const feedbackDiv = document.getElementById('feedback');
+            
+            feedbackDiv.className = 'feedback feedback-help show';
+            feedbackDiv.innerHTML = `
+                <div class="feedback-title">💡 Aide activée (-2 points)</div>
+                <div class="help-content">
+                    <strong>Indices pour vous aider :</strong>
+                    <ul>
+                        ${situation.hints.map(hint => `<li>${hint}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('help-btn').disabled = true;
+            updateScoreDisplay();
+        }
+
+        // Mettre à jour l'affichage du score
+        function updateScoreDisplay() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct-count').textContent = correctAnswers;
+        }
+
+        // Question suivante
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                loadQuestion();
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        // Afficher l'écran final
+        function showFinalScreen() {
+            document.getElementById('game-area').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
+            
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-correct').textContent = correctAnswers;
+            document.getElementById('final-incorrect').textContent = incorrectAnswers;
+            document.getElementById('final-help').textContent = helpUsed;
+            
+            // Déterminer la performance
+            const percentage = (correctAnswers / shuffledQuestions.length) * 100;
+            let badge = '';
+            let message = '';
+            
+            if (percentage >= 90) {
+                badge = '🏆';
+                message = 'Expert en Incoterms ! Performance exceptionnelle !';
+            } else if (percentage >= 75) {
+                badge = '🥇';
+                message = 'Très bon travail ! Vous maîtrisez bien les Incoterms !';
+            } else if (percentage >= 60) {
+                badge = '🥈';
+                message = 'Bon niveau ! Continuez à vous entraîner !';
+            } else if (percentage >= 40) {
+                badge = '🥉';
+                message = 'Pas mal ! Revoyez certains concepts et réessayez !';
+            } else {
+                badge = '📚';
+                message = 'Il faut réviser les Incoterms. Courage !';
+            }
+            
+            document.getElementById('badge').textContent = badge;
+            document.getElementById('performance-message').textContent = message;
+        }
+
+        // Recommencer le jeu
+        function restartGame() {
+            document.getElementById('game-area').classList.remove('hidden');
+            document.getElementById('final-screen').classList.add('hidden');
+            initGame();
+        }
+
+        // Démarrer le jeu au chargement de la page
+        window.onload = initGame;
+    </script>
+</body>
+</html>
