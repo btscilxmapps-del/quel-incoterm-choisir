@@ -193,6 +193,8 @@
             backdrop-filter: blur(20px);
             animation: cardAppear 0.6s ease-out;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes cardAppear {
@@ -344,6 +346,14 @@
         .feedback.correct {
             background: rgba(16, 185, 129, 0.15);
             border: 2px solid var(--success);
+            animation: feedbackAppear 0.4s ease-out, successPulse 0.6s ease-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.02); }
+            60% { transform: scale(0.98); }
+            100% { transform: scale(1); }
         }
 
         .feedback.incorrect {
@@ -573,10 +583,131 @@
         .incoterm-coverage strong {
             color: var(--primary);
         }
+
+        /* ===== CONFETTI STYLES ===== */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(400px) rotate(720deg);
+            }
+        }
+
+        /* ===== SUCCESS GLOW EFFECT ===== */
+        .success-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 60%);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .success-glow.active {
+            animation: glowPulse 1s ease-out forwards;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* ===== SCORE ANIMATION ===== */
+        .score-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--success);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 100;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .score-popup.active {
+            animation: scorePopup 1s ease-out forwards;
+        }
+
+        @keyframes scorePopup {
+            0% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) scale(0.5); 
+            }
+            30% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1.2); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translate(-50%, -80%) scale(1); 
+            }
+        }
+
+        /* ===== STAR BURST ===== */
+        .star-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+        @keyframes starBurst {
+            0% { 
+                opacity: 1; 
+                transform: translate(0, 0) scale(0.5); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translate(var(--tx), var(--ty)) scale(1); 
+            }
+        }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
+    
+    <!-- Score Popup -->
+    <div id="scorePopup" class="score-popup">+5</div>
     
     <div class="container">
         <header class="header">
@@ -647,7 +778,16 @@
                 </div>
             </div>
 
-            <div class="game-card">
+            <div class="game-card" id="gameCard">
+                <!-- Success Glow Effect -->
+                <div class="success-glow" id="successGlow"></div>
+                
+                <!-- Confetti Container -->
+                <div class="confetti-container" id="confettiContainer"></div>
+                
+                <!-- Star Burst -->
+                <div class="star-burst" id="starBurst"></div>
+                
                 <span class="situation-badge" id="situationType">
                     📤 Export
                 </span>
@@ -770,12 +910,12 @@
 
             // ===== CIP (Carriage and Insurance Paid To) =====
             {
-                text: "Vous exportez vers le Sénégal. Votre client vous demande d'organiser le transport maritime jusqu'au port de Dakar et de souscrire une assurance pour son compte. Il accepte le transfert de risque depuis le départ du transport principal.",
+                text: "Vous exportez vers le Sénégal. Votre client vous demande d'organiser le transport maritime de deux conteneurs de produits de décoration intérieure jusqu'au port de Dakar et de souscrire une assurance pour son compte. Il accepte le transfert de risque depuis le départ du transport principal.",
                 incoterm: "CIP",
                 city: "Dakar",
                 type: "export",
-                hint: "Transport + assurance payés par le vendeur, risques transférés au départ. Multimodal car l'assurance est souscrite.",
-                explanation: "CIP (Carriage and Insurance Paid to) : le vendeur organise le transport ET l'assurance jusqu'à Dakar. Les risques passent à l'acheteur au départ du transport principal."
+                hint: "Transport + assurance payés par le vendeur, risques transférés au départ. Conteneurs = multimodal, donc CIP et non CIF.",
+                explanation: "CIP (Carriage and Insurance Paid to) : le vendeur organise le transport ET l'assurance jusqu'à Dakar. Les risques passent à l'acheteur au départ du transport principal. CIP car marchandises conteneurisées (multimodal)."
             },
             {
                 text: "Vous importez de Chine des moteurs emballés dans des caisses en bois conteneurisées par bateau à destination de Tours. Port de débarquement : Le Havre. L'exportateur doit conclure le contrat de transport, assurance comprise. Vous assumez les risques depuis le port de départ.",
@@ -1042,12 +1182,86 @@
             return shuffled;
         }
 
-        // Normalize city name for comparison
+        // Normalize city name for comparison (case-insensitive, accent-insensitive)
         function normalizeCity(city) {
             return city.toLowerCase()
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                 .replace(/[-\s]/g, "")
                 .trim();
+        }
+
+        // ===== CELEBRATION EFFECTS =====
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            container.innerHTML = '';
+            
+            const colors = ['#10B981', '#F59E0B', '#FF6B35', '#3B82F6', '#8B5CF6'];
+            const shapes = ['●', '■', '▲', '★'];
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                confetti.style.animation = `confettiFall ${Math.random() * 1 + 1.5}s ease-out forwards`;
+                confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                container.appendChild(confetti);
+            }
+            
+            setTimeout(() => { container.innerHTML = ''; }, 2500);
+        }
+
+        function showSuccessGlow() {
+            const glow = document.getElementById('successGlow');
+            glow.classList.remove('active');
+            void glow.offsetWidth;
+            glow.classList.add('active');
+        }
+
+        function showScorePopup() {
+            const popup = document.getElementById('scorePopup');
+            popup.classList.remove('active');
+            void popup.offsetWidth;
+            popup.classList.add('active');
+        }
+
+        function createStarBurst() {
+            const container = document.getElementById('starBurst');
+            container.innerHTML = '';
+            
+            const stars = ['⭐', '✨', '🌟'];
+            const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+            
+            angles.forEach((angle, i) => {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = stars[i % stars.length];
+                
+                const radians = angle * Math.PI / 180;
+                const distance = 80;
+                const tx = Math.cos(radians) * distance;
+                const ty = Math.sin(radians) * distance;
+                
+                star.style.setProperty('--tx', tx + 'px');
+                star.style.setProperty('--ty', ty + 'px');
+                star.style.left = '50%';
+                star.style.top = '50%';
+                star.style.animation = `starBurst 0.8s ease-out forwards`;
+                star.style.animationDelay = (i * 0.05) + 's';
+                
+                container.appendChild(star);
+            });
+            
+            setTimeout(() => { container.innerHTML = ''; }, 1000);
+        }
+
+        function celebrateCorrectAnswer() {
+            createConfetti();
+            showSuccessGlow();
+            showScorePopup();
+            createStarBurst();
         }
 
         // Start game
@@ -1164,6 +1378,10 @@
             if (isCorrect) {
                 score += 5;
                 correctAnswers++;
+                
+                // Trigger celebration
+                celebrateCorrectAnswer();
+                
                 feedback.className = 'feedback correct';
                 feedback.innerHTML = `
                     <div class="feedback-header">
