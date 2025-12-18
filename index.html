@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Incoterms 2020 - BTS Commerce International</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root {
             --primary: #FF6B35;
@@ -323,6 +324,17 @@
         .btn-help {
             background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%);
             color: white;
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
         }
 
         .btn:disabled {
@@ -701,6 +713,66 @@
                 transform: translate(var(--tx), var(--ty)) scale(1); 
             }
         }
+
+        /* ===== PDF FORM MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content h3 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-content .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .input-group label {
+            color: var(--text-muted);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .end-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -708,6 +780,29 @@
     
     <!-- Score Popup -->
     <div id="scorePopup" class="score-popup">+5</div>
+    
+    <!-- PDF Form Modal -->
+    <div id="pdfModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>📄 Générer votre attestation PDF</h3>
+            <div class="input-group">
+                <label for="studentLastName">Nom *</label>
+                <input type="text" id="studentLastName" placeholder="Votre nom de famille">
+            </div>
+            <div class="input-group">
+                <label for="studentFirstName">Prénom *</label>
+                <input type="text" id="studentFirstName" placeholder="Votre prénom">
+            </div>
+            <div class="input-group">
+                <label for="studentClass">Classe *</label>
+                <input type="text" id="studentClass" placeholder="Ex: BTS CI 1ère année">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closePdfModal()">Annuler</button>
+                <button class="btn btn-pdf" onclick="generatePDF()">📥 Télécharger le PDF</button>
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <header class="header">
@@ -867,9 +962,14 @@
 
             <p id="finalMessage"></p>
             
-            <button class="btn btn-primary" onclick="restartGame()">
-                🔄 Recommencer le Quiz
-            </button>
+            <div class="end-buttons">
+                <button class="btn btn-pdf" onclick="openPdfModal()">
+                    📄 Générer mon attestation PDF
+                </button>
+                <button class="btn btn-primary" onclick="restartGame()">
+                    🔄 Recommencer le Quiz
+                </button>
+            </div>
         </div>
 
         <footer class="copyright">
@@ -1171,6 +1271,11 @@
         let helpUsedForCurrent = false;
         let answered = false;
         let questionCount = 30;
+        let gameStartTime = null;
+        let gameEndTime = null;
+        
+        // Store answers for PDF
+        let answersHistory = [];
 
         // Shuffle array
         function shuffleArray(array) {
@@ -1273,6 +1378,8 @@
             correctAnswers = 0;
             errors = 0;
             helpsUsed = 0;
+            gameStartTime = new Date();
+            answersHistory = [];
             
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('endScreen').classList.add('hidden');
@@ -1375,6 +1482,18 @@
             const cityCorrect = normalizeCity(enteredCity) === normalizeCity(situation.city);
             const isCorrect = incotermCorrect && cityCorrect;
             
+            // Store answer for PDF
+            answersHistory.push({
+                questionNum: currentIndex + 1,
+                type: situation.type,
+                expectedIncoterm: situation.incoterm,
+                expectedCity: situation.city,
+                givenIncoterm: selectedIncoterm,
+                givenCity: enteredCity,
+                isCorrect: isCorrect,
+                usedHelp: helpUsedForCurrent
+            });
+            
             if (isCorrect) {
                 score += 5;
                 correctAnswers++;
@@ -1436,6 +1555,8 @@
 
         // End game
         function endGame() {
+            gameEndTime = new Date();
+            
             document.getElementById('gameScreen').classList.add('hidden');
             document.getElementById('endScreen').classList.remove('hidden');
             
@@ -1473,6 +1594,336 @@
             document.getElementById('endScreen').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
         }
+
+        // ===== PDF GENERATION =====
+        function openPdfModal() {
+            document.getElementById('pdfModal').classList.remove('hidden');
+            document.getElementById('studentLastName').focus();
+        }
+
+        function closePdfModal() {
+            document.getElementById('pdfModal').classList.add('hidden');
+        }
+
+        function generatePDF() {
+            const lastName = document.getElementById('studentLastName').value.trim();
+            const firstName = document.getElementById('studentFirstName').value.trim();
+            const studentClass = document.getElementById('studentClass').value.trim();
+
+            if (!lastName || !firstName || !studentClass) {
+                alert('Veuillez remplir tous les champs obligatoires.');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const percentage = Math.round((correctAnswers / shuffledSituations.length) * 100);
+            let grade = '';
+            let gradeColor = [0, 0, 0];
+            
+            if (percentage >= 90) {
+                grade = 'Expert Incoterms';
+                gradeColor = [16, 185, 129];
+            } else if (percentage >= 70) {
+                grade = 'Tres bien';
+                gradeColor = [59, 130, 246];
+            } else if (percentage >= 50) {
+                grade = 'En progression';
+                gradeColor = [245, 158, 11];
+            } else {
+                grade = 'A reviser';
+                gradeColor = [239, 68, 68];
+            }
+
+            // Calculate duration
+            const duration = Math.round((gameEndTime - gameStartTime) / 1000 / 60);
+            const durationText = duration < 1 ? "moins d'1 minute" : `${duration} minute${duration > 1 ? 's' : ''}`;
+
+            // Format dates
+            const dateOptions = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const dateStr = gameEndTime.toLocaleDateString('fr-FR', dateOptions);
+
+            // ===== PAGE 1 - RÉSULTATS =====
+            
+            // Header background
+            doc.setFillColor(26, 26, 46);
+            doc.rect(0, 0, 210, 45, 'F');
+
+            // Header accent line
+            doc.setFillColor(255, 107, 53);
+            doc.rect(0, 45, 210, 2, 'F');
+
+            // Title
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(22);
+            doc.setFont('helvetica', 'bold');
+            doc.text('ATTESTATION DE RESULTATS', 105, 22, { align: 'center' });
+            
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Quiz Incoterms 2020 - BTS Commerce International', 105, 35, { align: 'center' });
+
+            // Student info section
+            doc.setTextColor(60, 60, 60);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('INFORMATIONS ETUDIANT', 20, 60);
+
+            doc.setDrawColor(200, 200, 200);
+            doc.line(20, 63, 190, 63);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            
+            doc.text(`Nom : ${lastName.toUpperCase()}`, 20, 72);
+            doc.text(`Prenom : ${firstName}`, 105, 72);
+            doc.text(`Classe : ${studentClass}`, 20, 80);
+            doc.text(`Date : ${dateStr}`, 105, 80);
+            doc.text(`Duree : ${durationText}`, 20, 88);
+
+            // Results section
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('RESULTATS', 20, 102);
+            doc.line(20, 105, 190, 105);
+
+            // Score box
+            doc.setFillColor(245, 245, 245);
+            doc.roundedRect(20, 110, 170, 35, 3, 3, 'F');
+
+            // Grade badge
+            doc.setFillColor(...gradeColor);
+            doc.roundedRect(25, 115, 45, 15, 2, 2, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text(grade, 47.5, 124, { align: 'center' });
+
+            // Score
+            doc.setTextColor(255, 107, 53);
+            doc.setFontSize(24);
+            doc.text(`${score} pts`, 115, 128, { align: 'center' });
+
+            // Percentage
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(11);
+            doc.text(`${percentage}% de reussite`, 165, 128, { align: 'center' });
+
+            // Mini stats
+            doc.setFontSize(9);
+            doc.setTextColor(80, 80, 80);
+            doc.text(`${correctAnswers} bonnes reponses`, 25, 140);
+            doc.text(`${errors} erreurs`, 80, 140);
+            doc.text(`${helpsUsed} aides`, 120, 140);
+            doc.text(`${shuffledSituations.length} questions`, 155, 140);
+
+            // Questions recap title
+            doc.setTextColor(60, 60, 60);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('DETAIL DES REPONSES', 20, 158);
+            doc.line(20, 161, 190, 161);
+
+            // Table header
+            const tableStartY = 166;
+            doc.setFillColor(26, 26, 46);
+            doc.rect(20, tableStartY, 170, 8, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'bold');
+            doc.text('N°', 24, tableStartY + 5.5);
+            doc.text('Type', 35, tableStartY + 5.5);
+            doc.text('Reponse attendue', 58, tableStartY + 5.5);
+            doc.text('Votre reponse', 110, tableStartY + 5.5);
+            doc.text('Aide', 155, tableStartY + 5.5);
+            doc.text('Statut', 172, tableStartY + 5.5);
+
+            // Table rows
+            doc.setFont('helvetica', 'normal');
+            let currentY = tableStartY + 8;
+            const rowHeight = 7;
+            const maxRowsPage1 = 14;
+
+            answersHistory.slice(0, maxRowsPage1).forEach((answer, i) => {
+                // Alternate row colors
+                if (i % 2 === 0) {
+                    doc.setFillColor(250, 250, 250);
+                    doc.rect(20, currentY, 170, rowHeight, 'F');
+                }
+
+                doc.setTextColor(60, 60, 60);
+                doc.setFontSize(7);
+                
+                // Question number
+                doc.text(String(answer.questionNum), 24, currentY + 5);
+                
+                // Type (Export/Import)
+                doc.text(answer.type === 'export' ? 'EXP' : 'IMP', 35, currentY + 5);
+                
+                // Expected answer
+                doc.text(`${answer.expectedIncoterm} ${answer.expectedCity}`, 58, currentY + 5);
+                
+                // Given answer
+                const givenText = `${answer.givenIncoterm} ${answer.givenCity}`;
+                doc.text(givenText.substring(0, 25), 110, currentY + 5);
+                
+                // Help used
+                doc.text(answer.usedHelp ? 'Oui' : '-', 158, currentY + 5);
+                
+                // Status with color
+                if (answer.isCorrect) {
+                    doc.setFillColor(16, 185, 129);
+                    doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(6);
+                    doc.text('CORRECT', 177, currentY + 4.5, { align: 'center' });
+                } else {
+                    doc.setFillColor(239, 68, 68);
+                    doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(6);
+                    doc.text('FAUX', 177, currentY + 4.5, { align: 'center' });
+                }
+
+                currentY += rowHeight;
+            });
+
+            // Footer page 1
+            doc.setFillColor(26, 26, 46);
+            doc.rect(0, 287, 210, 10, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(7);
+            doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International', 105, 293, { align: 'center' });
+            doc.text('Page 1/' + (answersHistory.length > maxRowsPage1 ? '2' : '1'), 190, 293);
+
+            // ===== PAGE 2 (if needed) =====
+            if (answersHistory.length > maxRowsPage1) {
+                doc.addPage();
+
+                // Header page 2
+                doc.setFillColor(26, 26, 46);
+                doc.rect(0, 0, 210, 25, 'F');
+                doc.setFillColor(255, 107, 53);
+                doc.rect(0, 25, 210, 2, 'F');
+
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(14);
+                doc.setFont('helvetica', 'bold');
+                doc.text('DETAIL DES REPONSES (suite)', 105, 16, { align: 'center' });
+
+                // Student name reminder
+                doc.setTextColor(100, 100, 100);
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`${firstName} ${lastName.toUpperCase()} - ${studentClass}`, 20, 38);
+
+                // Table header page 2
+                const table2StartY = 45;
+                doc.setFillColor(26, 26, 46);
+                doc.rect(20, table2StartY, 170, 8, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'bold');
+                doc.text('N°', 24, table2StartY + 5.5);
+                doc.text('Type', 35, table2StartY + 5.5);
+                doc.text('Reponse attendue', 58, table2StartY + 5.5);
+                doc.text('Votre reponse', 110, table2StartY + 5.5);
+                doc.text('Aide', 155, table2StartY + 5.5);
+                doc.text('Statut', 172, table2StartY + 5.5);
+
+                // Remaining rows
+                doc.setFont('helvetica', 'normal');
+                currentY = table2StartY + 8;
+
+                answersHistory.slice(maxRowsPage1).forEach((answer, i) => {
+                    if (i % 2 === 0) {
+                        doc.setFillColor(250, 250, 250);
+                        doc.rect(20, currentY, 170, rowHeight, 'F');
+                    }
+
+                    doc.setTextColor(60, 60, 60);
+                    doc.setFontSize(7);
+                    
+                    doc.text(String(answer.questionNum), 24, currentY + 5);
+                    doc.text(answer.type === 'export' ? 'EXP' : 'IMP', 35, currentY + 5);
+                    doc.text(`${answer.expectedIncoterm} ${answer.expectedCity}`, 58, currentY + 5);
+                    doc.text(`${answer.givenIncoterm} ${answer.givenCity}`.substring(0, 25), 110, currentY + 5);
+                    doc.text(answer.usedHelp ? 'Oui' : '-', 158, currentY + 5);
+                    
+                    if (answer.isCorrect) {
+                        doc.setFillColor(16, 185, 129);
+                        doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
+                        doc.setTextColor(255, 255, 255);
+                        doc.setFontSize(6);
+                        doc.text('CORRECT', 177, currentY + 4.5, { align: 'center' });
+                    } else {
+                        doc.setFillColor(239, 68, 68);
+                        doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
+                        doc.setTextColor(255, 255, 255);
+                        doc.setFontSize(6);
+                        doc.text('FAUX', 177, currentY + 4.5, { align: 'center' });
+                    }
+
+                    currentY += rowHeight;
+                });
+
+                // Summary at end of page 2
+                currentY += 10;
+                doc.setFillColor(245, 245, 245);
+                doc.roundedRect(20, currentY, 170, 25, 3, 3, 'F');
+                
+                doc.setTextColor(60, 60, 60);
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.text('RECAPITULATIF', 105, currentY + 8, { align: 'center' });
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                const correctPct = Math.round((correctAnswers / shuffledSituations.length) * 100);
+                doc.setTextColor(16, 185, 129);
+                doc.text(`Reponses correctes: ${correctAnswers}/${shuffledSituations.length} (${correctPct}%)`, 30, currentY + 18);
+                doc.setTextColor(239, 68, 68);
+                doc.text(`Erreurs: ${errors}`, 100, currentY + 18);
+                doc.setTextColor(245, 158, 11);
+                doc.text(`Aides: ${helpsUsed}`, 140, currentY + 18);
+
+                // Footer page 2
+                doc.setFillColor(26, 26, 46);
+                doc.rect(0, 287, 210, 10, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(7);
+                doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International', 105, 293, { align: 'center' });
+                doc.text('Page 2/2', 190, 293);
+            }
+
+            // Save PDF
+            const filename = `Quiz_Incoterms_${lastName.toUpperCase()}_${firstName}_${new Date().toISOString().slice(0,10)}.pdf`;
+            doc.save(filename);
+
+            closePdfModal();
+        }
+
+        // Close modal on outside click
+        document.getElementById('pdfModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePdfModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePdfModal();
+            }
+        });
     </script>
 </body>
 </html>
