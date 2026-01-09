@@ -20,1911 +20,242 @@
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 50%, #0F0F23 100%);
-            min-height: 100vh;
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
-        }
-
-        .bg-pattern::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, var(--primary) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, #4F46E5 0%, transparent 50%);
-            animation: bgMove 20s ease-in-out infinite;
-        }
-
-        @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-5%, 5%); }
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--text-light) 0%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
-
-        .score-panel {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .score-item {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1rem 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .score-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .score-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.3rem;
-        }
-
-        .score-value {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 50%, #0F0F23 100%); min-height: 100vh; color: var(--text-light); overflow-x: hidden; }
+        .bg-pattern { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.4; }
+        .bg-pattern::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background-image: radial-gradient(circle at 20% 80%, var(--primary) 0%, transparent 50%), radial-gradient(circle at 80% 20%, #4F46E5 0%, transparent 50%); animation: bgMove 20s ease-in-out infinite; }
+        @keyframes bgMove { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-5%, 5%); } }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        .header { text-align: center; margin-bottom: 2rem; animation: slideDown 0.8s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .logo { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .logo-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3); }
+        h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--text-light) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-top: 0.5rem; }
+        .score-panel { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .score-item { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1rem 2rem; text-align: center; backdrop-filter: blur(10px); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .score-item:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        .score-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+        .score-value { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: var(--primary); }
         .score-value.positive { color: var(--success); }
         .score-value.negative { color: var(--error); }
-
-        .progress-container {
-            margin-bottom: 2rem;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--glass);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, #F59E0B 100%);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-
-        .game-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            backdrop-filter: blur(20px);
-            animation: cardAppear 0.6s ease-out;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes cardAppear {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .situation-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .situation-text {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 107, 53, 0.05);
-            border-left: 4px solid var(--primary);
-            border-radius: 0 12px 12px 0;
-        }
-
-        .input-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 600px) {
-            .input-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .input-group label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .input-group select,
-        .input-group input {
-            padding: 1rem 1.25rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .input-group select:focus,
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
-        }
-
-        .input-group select option {
-            background: var(--secondary);
-            color: var(--text-light);
-        }
-
-        .buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--glass);
-            border: 2px solid var(--glass-border);
-            color: var(--text-light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary);
-        }
-
-        .btn-help {
-            background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%);
-            color: white;
-        }
-
-        .btn-pdf {
-            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-            color: white;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-pdf:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .feedback {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border-radius: 16px;
-            animation: feedbackAppear 0.4s ease-out;
-        }
-
-        @keyframes feedbackAppear {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .feedback.correct {
-            background: rgba(16, 185, 129, 0.15);
-            border: 2px solid var(--success);
-            animation: feedbackAppear 0.4s ease-out, successPulse 0.6s ease-out;
-        }
-
-        @keyframes successPulse {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.02); }
-            60% { transform: scale(0.98); }
-            100% { transform: scale(1); }
-        }
-
-        .feedback.incorrect {
-            background: rgba(239, 68, 68, 0.15);
-            border: 2px solid var(--error);
-        }
-
-        .feedback.help {
-            background: rgba(245, 158, 11, 0.15);
-            border: 2px solid var(--warning);
-        }
-
-        .feedback-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
+        .progress-container { margin-bottom: 2rem; }
+        .progress-info { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .progress-bar { height: 8px; background: var(--glass); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary) 0%, #F59E0B 100%); border-radius: 4px; transition: width 0.5s ease; }
+        .game-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(20px); animation: cardAppear 0.6s ease-out; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); position: relative; overflow: hidden; }
+        @keyframes cardAppear { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .situation-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .situation-text { font-size: 1.25rem; line-height: 1.8; color: var(--text-light); margin-bottom: 2rem; padding: 1.5rem; background: rgba(255, 107, 53, 0.05); border-left: 4px solid var(--primary); border-radius: 0 12px 12px 0; }
+        .input-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        @media (max-width: 600px) { .input-section { grid-template-columns: 1fr; } }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        .input-group select, .input-group input { padding: 1rem 1.25rem; background: rgba(0, 0, 0, 0.3); border: 2px solid var(--glass-border); border-radius: 12px; color: var(--text-light); font-size: 1rem; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
+        .input-group select:focus, .input-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2); }
+        .input-group select option { background: var(--secondary); color: var(--text-light); }
+        .buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 1rem 2rem; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4); }
+        .btn-secondary { background: var(--glass); border: 2px solid var(--glass-border); color: var(--text-light); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
+        .btn-help { background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%); color: white; }
+        .btn-pdf { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); color: white; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); }
+        .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4); }
+        .btn-save { background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); color: white; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
+        .btn-save:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4); }
+        .btn-load { background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); }
+        .btn-load:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .feedback { margin-top: 2rem; padding: 1.5rem; border-radius: 16px; animation: feedbackAppear 0.4s ease-out; }
+        @keyframes feedbackAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct { background: rgba(16, 185, 129, 0.15); border: 2px solid var(--success); animation: feedbackAppear 0.4s ease-out, successPulse 0.6s ease-out; }
+        @keyframes successPulse { 0% { transform: scale(1); } 30% { transform: scale(1.02); } 60% { transform: scale(0.98); } 100% { transform: scale(1); } }
+        .feedback.incorrect { background: rgba(239, 68, 68, 0.15); border: 2px solid var(--error); }
+        .feedback.help { background: rgba(245, 158, 11, 0.15); border: 2px solid var(--warning); }
+        .feedback-header { display: flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
         .feedback.correct .feedback-header { color: var(--success); }
         .feedback.incorrect .feedback-header { color: var(--error); }
         .feedback.help .feedback-header { color: var(--warning); }
-
-        .feedback-icon {
-            font-size: 1.5rem;
-        }
-
-        .feedback-text {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .correct-answer {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .screen {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .screen h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .screen p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .rules {
-            text-align: left;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
-
-        .rules h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .rules ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .rules li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-light);
-        }
-
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-text { color: var(--text-light); line-height: 1.6; }
+        .correct-answer { margin-top: 1rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 8px; font-family: 'Space Mono', monospace; font-weight: 700; color: var(--primary); }
+        .screen { text-align: center; padding: 3rem; }
+        .screen h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .screen p { color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8; }
+        .rules { text-align: left; background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+        .rules h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+        .rules ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .rules li { display: flex; align-items: center; gap: 0.75rem; color: var(--text-light); }
         .rules .points-positive { color: var(--success); font-weight: 700; }
         .rules .points-negative { color: var(--error); font-weight: 700; }
-
-        .final-score {
-            font-family: 'Space Mono', monospace;
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--warning) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 2rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        @media (max-width: 500px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .stat-card {
-            background: var(--glass);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .stat-card .value {
-            font-family: 'Space Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .stat-card .label {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 0.25rem;
-        }
-
+        .final-score { font-family: 'Space Mono', monospace; font-size: 4rem; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--warning) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 2rem 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+        @media (max-width: 500px) { .stats-grid { grid-template-columns: 1fr; } }
+        .stat-card { background: var(--glass); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); }
+        .stat-card .value { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; }
+        .stat-card .label { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
         .stat-card.success .value { color: var(--success); }
         .stat-card.error .value { color: var(--error); }
         .stat-card.warning .value { color: var(--warning); }
-
-        .copyright {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .copyright span {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .pulse {
-            animation: pulse 0.5s ease;
-        }
-
-        .grade-badge {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 1rem;
-        }
-
-        .grade-excellent {
-            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-            color: white;
-        }
-
-        .grade-good {
-            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-            color: white;
-        }
-
-        .grade-average {
-            background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%);
-            color: white;
-        }
-
-        .grade-poor {
-            background: linear-gradient(135deg, var(--error) 0%, #DC2626 100%);
-            color: white;
-        }
-
-        .question-count-section {
-            margin: 2rem 0;
-        }
-
-        .question-count-section label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-muted);
-        }
-
-        .question-count-section select {
-            padding: 0.75rem 1.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .question-count-section select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .incoterm-coverage {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .incoterm-coverage strong {
-            color: var(--primary);
-        }
-
-        /* ===== CONFETTI STYLES ===== */
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-        }
-
-        @keyframes confettiFall {
-            0% {
-                opacity: 1;
-                transform: translateY(-20px) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(400px) rotate(720deg);
-            }
-        }
-
-        /* ===== SUCCESS GLOW EFFECT ===== */
-        .success-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            height: 200%;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 60%);
-            pointer-events: none;
-            opacity: 0;
-            z-index: 5;
-        }
-
-        .success-glow.active {
-            animation: glowPulse 1s ease-out forwards;
-        }
-
-        @keyframes glowPulse {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        /* ===== SCORE ANIMATION ===== */
-        .score-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Space Mono', monospace;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--success);
-            pointer-events: none;
-            opacity: 0;
-            z-index: 100;
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-
-        .score-popup.active {
-            animation: scorePopup 1s ease-out forwards;
-        }
-
-        @keyframes scorePopup {
-            0% { 
-                opacity: 0; 
-                transform: translate(-50%, -50%) scale(0.5); 
-            }
-            30% { 
-                opacity: 1; 
-                transform: translate(-50%, -50%) scale(1.2); 
-            }
-            100% { 
-                opacity: 0; 
-                transform: translate(-50%, -80%) scale(1); 
-            }
-        }
-
-        /* ===== STAR BURST ===== */
-        .star-burst {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100px;
-            height: 100px;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 6;
-        }
-
-        .star {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0;
-        }
-
-        @keyframes starBurst {
-            0% { 
-                opacity: 1; 
-                transform: translate(0, 0) scale(0.5); 
-            }
-            100% { 
-                opacity: 0; 
-                transform: translate(var(--tx), var(--ty)) scale(1); 
-            }
-        }
-
-        /* ===== PDF FORM MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            max-width: 500px;
-            width: 90%;
-            animation: modalAppear 0.3s ease-out;
-        }
-
-        @keyframes modalAppear {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-content h3 {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
-        .modal-content .input-group {
-            margin-bottom: 1rem;
-        }
-
-        .modal-content .input-group label {
-            color: var(--text-muted);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            justify-content: center;
-        }
-
-        .end-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 2rem;
-        }
+        .copyright { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; }
+        .copyright span { color: var(--primary); font-weight: 600; }
+        .hidden { display: none !important; }
+        .grade-badge { display: inline-block; padding: 0.75rem 2rem; border-radius: 50px; font-size: 1.2rem; font-weight: 700; margin-top: 1rem; }
+        .grade-excellent { background: linear-gradient(135deg, var(--success) 0%, #059669 100%); color: white; }
+        .grade-good { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); color: white; }
+        .grade-average { background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%); color: white; }
+        .grade-poor { background: linear-gradient(135deg, var(--error) 0%, #DC2626 100%); color: white; }
+        .question-count-section { margin: 2rem 0; }
+        .question-count-section label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); }
+        .question-count-section select { padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.3); border: 2px solid var(--glass-border); border-radius: 12px; color: var(--text-light); font-size: 1rem; font-family: 'Outfit', sans-serif; }
+        .question-count-section select:focus { outline: none; border-color: var(--primary); }
+        .incoterm-coverage { margin-top: 1.5rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); }
+        .incoterm-coverage strong { color: var(--primary); }
+        .confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 10; }
+        .confetti { position: absolute; width: 10px; height: 10px; opacity: 0; }
+        @keyframes confettiFall { 0% { opacity: 1; transform: translateY(-20px) rotate(0deg); } 100% { opacity: 0; transform: translateY(400px) rotate(720deg); } }
+        .success-glow { position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 60%); pointer-events: none; opacity: 0; z-index: 5; }
+        .success-glow.active { animation: glowPulse 1s ease-out forwards; }
+        @keyframes glowPulse { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 50% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); } }
+        .score-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Space Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--success); pointer-events: none; opacity: 0; z-index: 100; text-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
+        .score-popup.active { animation: scorePopup 1s ease-out forwards; }
+        @keyframes scorePopup { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 30% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(1); } }
+        .star-burst { position: absolute; top: 50%; left: 50%; width: 100px; height: 100px; transform: translate(-50%, -50%); pointer-events: none; z-index: 6; }
+        .star { position: absolute; font-size: 1.5rem; opacity: 0; }
+        @keyframes starBurst { 0% { opacity: 1; transform: translate(0, 0) scale(0.5); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1); } }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2.5rem; max-width: 500px; width: 90%; animation: modalAppear 0.3s ease-out; }
+        @keyframes modalAppear { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-content h3 { color: var(--text-light); margin-bottom: 1.5rem; font-size: 1.5rem; text-align: center; }
+        .modal-content .input-group { margin-bottom: 1rem; }
+        .modal-content .input-group label { color: var(--text-muted); }
+        .modal-buttons { display: flex; gap: 1rem; margin-top: 2rem; justify-content: center; }
+        .end-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+        .save-load-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border); }
+        .save-load-section h4 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; text-align: center; }
+        .save-load-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .file-input-hidden { display: none; }
+        .game-save-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); text-align: center; }
+        .btn-small { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
-    
-    <!-- Score Popup -->
     <div id="scorePopup" class="score-popup">+5</div>
-    
-    <!-- PDF Form Modal -->
     <div id="pdfModal" class="modal-overlay hidden">
         <div class="modal-content">
             <h3>📄 Générer votre attestation PDF</h3>
-            <div class="input-group">
-                <label for="studentLastName">Nom *</label>
-                <input type="text" id="studentLastName" placeholder="Votre nom de famille">
-            </div>
-            <div class="input-group">
-                <label for="studentFirstName">Prénom *</label>
-                <input type="text" id="studentFirstName" placeholder="Votre prénom">
-            </div>
-            <div class="input-group">
-                <label for="studentClass">Classe *</label>
-                <input type="text" id="studentClass" placeholder="Ex: BTS CI 1ère année">
-            </div>
-            <div class="modal-buttons">
-                <button class="btn btn-secondary" onclick="closePdfModal()">Annuler</button>
-                <button class="btn btn-pdf" onclick="generatePDF()">📥 Télécharger le PDF</button>
-            </div>
+            <div class="input-group"><label for="studentLastName">Nom *</label><input type="text" id="studentLastName" placeholder="Votre nom de famille"></div>
+            <div class="input-group"><label for="studentFirstName">Prénom *</label><input type="text" id="studentFirstName" placeholder="Votre prénom"></div>
+            <div class="input-group"><label for="studentClass">Classe *</label><input type="text" id="studentClass" placeholder="Ex: BTS CI 1ère année"></div>
+            <div class="modal-buttons"><button class="btn btn-secondary" onclick="closePdfModal()">Annuler</button><button class="btn btn-pdf" onclick="generatePDF()">📥 Télécharger le PDF</button></div>
         </div>
     </div>
-    
+    <input type="file" id="loadFileInput" class="file-input-hidden" accept=".json" onchange="handleLoadFile(event)">
     <div class="container">
-        <header class="header">
-            <div class="logo">
-                <div class="logo-icon">🚢</div>
-                <h1>Quiz Incoterms 2020</h1>
-            </div>
-            <p class="subtitle">BTS Commerce International</p>
-        </header>
-
-        <!-- Start Screen -->
+        <header class="header"><div class="logo"><div class="logo-icon">🚢</div><h1>Quiz Incoterms 2020</h1></div><p class="subtitle">BTS Commerce International</p></header>
         <div id="startScreen" class="game-card screen">
             <h2>Bienvenue dans le Quiz Incoterms !</h2>
-            <p>Testez vos connaissances sur les Incoterms 2020 à travers des situations réelles d'import-export. Analysez chaque contexte et identifiez l'Incoterm approprié ainsi que la ville de livraison.</p>
-            
-            <div class="rules">
-                <h3>📋 Règles du jeu</h3>
-                <ul>
-                    <li>✅ <span class="points-positive">+5 points</span> pour chaque bonne réponse</li>
-                    <li>❌ <span class="points-negative">-3 points</span> pour chaque erreur</li>
-                    <li>💡 <span class="points-negative">-2 points</span> si vous demandez de l'aide</li>
-                </ul>
-            </div>
-
-            <div class="question-count-section">
-                <label for="questionCount">Nombre de questions :</label>
-                <select id="questionCount">
-                    <option value="10">10 questions</option>
-                    <option value="15">15 questions</option>
-                    <option value="20">20 questions</option>
-                    <option value="30" selected>30 questions (complet)</option>
-                </select>
-            </div>
-
-            <div class="incoterm-coverage">
-                <strong>Incoterms couverts :</strong> EXW, FCA, FAS, FOB, CFR, CIF, CPT, CIP, DAP, DPU, DDP
-            </div>
-            
-            <button class="btn btn-primary" onclick="startGame()" style="margin-top: 2rem;">
-                🎯 Commencer le Quiz
-            </button>
+            <p>Testez vos connaissances sur les Incoterms 2020 à travers des situations réelles d'import-export.</p>
+            <div class="rules"><h3>📋 Règles du jeu</h3><ul><li>✅ <span class="points-positive">+5 points</span> pour chaque bonne réponse</li><li>❌ <span class="points-negative">-3 points</span> pour chaque erreur</li><li>💡 <span class="points-negative">-2 points</span> si vous demandez de l'aide</li></ul></div>
+            <div class="question-count-section"><label for="questionCount">Nombre de questions :</label><select id="questionCount"><option value="10">10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option><option value="30" selected>30 questions (complet)</option></select></div>
+            <div class="incoterm-coverage"><strong>Incoterms couverts :</strong> EXW, FCA, FAS, FOB, CFR, CIF, CPT, CIP, DAP, DPU, DDP</div>
+            <button class="btn btn-primary" onclick="startGame()" style="margin-top: 2rem;">🎯 Commencer le Quiz</button>
+            <div class="save-load-section"><h4>💾 Reprendre une partie sauvegardée</h4><div class="save-load-buttons"><button class="btn btn-load" onclick="triggerLoadFile()">📂 Charger une sauvegarde</button></div></div>
         </div>
-
-        <!-- Game Screen -->
         <div id="gameScreen" class="hidden">
-            <div class="score-panel">
-                <div class="score-item">
-                    <div class="score-label">Score</div>
-                    <div class="score-value" id="currentScore">0</div>
-                </div>
-                <div class="score-item">
-                    <div class="score-label">Bonnes réponses</div>
-                    <div class="score-value positive" id="correctCount">0</div>
-                </div>
-                <div class="score-item">
-                    <div class="score-label">Erreurs</div>
-                    <div class="score-value negative" id="errorCount">0</div>
-                </div>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span>Question <span id="currentQuestion">1</span> / <span id="totalQuestions">30</span></span>
-                    <span id="progressPercent">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                </div>
-            </div>
-
+            <div class="score-panel"><div class="score-item"><div class="score-label">Score</div><div class="score-value" id="currentScore">0</div></div><div class="score-item"><div class="score-label">Bonnes réponses</div><div class="score-value positive" id="correctCount">0</div></div><div class="score-item"><div class="score-label">Erreurs</div><div class="score-value negative" id="errorCount">0</div></div></div>
+            <div class="progress-container"><div class="progress-info"><span>Question <span id="currentQuestion">1</span> / <span id="totalQuestions">30</span></span><span id="progressPercent">0%</span></div><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div></div>
             <div class="game-card" id="gameCard">
-                <!-- Success Glow Effect -->
-                <div class="success-glow" id="successGlow"></div>
-                
-                <!-- Confetti Container -->
-                <div class="confetti-container" id="confettiContainer"></div>
-                
-                <!-- Star Burst -->
-                <div class="star-burst" id="starBurst"></div>
-                
-                <span class="situation-badge" id="situationType">
-                    📤 Export
-                </span>
-                
-                <div class="situation-text" id="situationText">
-                    Chargement de la situation...
-                </div>
-
-                <div class="input-section">
-                    <div class="input-group">
-                        <label for="incoterm">Incoterm</label>
-                        <select id="incoterm">
-                            <option value="">-- Sélectionnez un Incoterm --</option>
-                            <optgroup label="Tout mode de transport">
-                                <option value="EXW">EXW - Ex Works</option>
-                                <option value="FCA">FCA - Free Carrier</option>
-                                <option value="CPT">CPT - Carriage Paid To</option>
-                                <option value="CIP">CIP - Carriage & Insurance Paid To</option>
-                                <option value="DAP">DAP - Delivered At Place</option>
-                                <option value="DPU">DPU - Delivered at Place Unloaded</option>
-                                <option value="DDP">DDP - Delivered Duty Paid</option>
-                            </optgroup>
-                            <optgroup label="Transport maritime uniquement">
-                                <option value="FAS">FAS - Free Alongside Ship</option>
-                                <option value="FOB">FOB - Free On Board</option>
-                                <option value="CFR">CFR - Cost and Freight</option>
-                                <option value="CIF">CIF - Cost, Insurance & Freight</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="city">Ville</label>
-                        <input type="text" id="city" placeholder="Ex: Paris, Rotterdam...">
-                    </div>
-                </div>
-
-                <div class="buttons">
-                    <button class="btn btn-help" onclick="showHelp()" id="helpBtn">
-                        💡 Aide (-2 pts)
-                    </button>
-                    <button class="btn btn-primary" onclick="submitAnswer()" id="submitBtn">
-                        ✓ Valider ma réponse
-                    </button>
-                </div>
-
+                <div class="success-glow" id="successGlow"></div><div class="confetti-container" id="confettiContainer"></div><div class="star-burst" id="starBurst"></div>
+                <span class="situation-badge" id="situationType">📤 Export</span>
+                <div class="situation-text" id="situationText">Chargement...</div>
+                <div class="input-section"><div class="input-group"><label for="incoterm">Incoterm</label><select id="incoterm"><option value="">-- Sélectionnez un Incoterm --</option><optgroup label="Tout mode de transport"><option value="EXW">EXW - Ex Works</option><option value="FCA">FCA - Free Carrier</option><option value="CPT">CPT - Carriage Paid To</option><option value="CIP">CIP - Carriage & Insurance Paid To</option><option value="DAP">DAP - Delivered At Place</option><option value="DPU">DPU - Delivered at Place Unloaded</option><option value="DDP">DDP - Delivered Duty Paid</option></optgroup><optgroup label="Transport maritime uniquement"><option value="FAS">FAS - Free Alongside Ship</option><option value="FOB">FOB - Free On Board</option><option value="CFR">CFR - Cost and Freight</option><option value="CIF">CIF - Cost, Insurance & Freight</option></optgroup></select></div><div class="input-group"><label for="city">Ville</label><input type="text" id="city" placeholder="Ex: Paris, Rotterdam..."></div></div>
+                <div class="buttons"><button class="btn btn-help" onclick="showHelp()" id="helpBtn">💡 Aide (-2 pts)</button><button class="btn btn-primary" onclick="submitAnswer()" id="submitBtn">✓ Valider ma réponse</button></div>
                 <div id="feedback" class="feedback hidden"></div>
-
-                <div class="buttons" style="margin-top: 1.5rem;">
-                    <button class="btn btn-secondary hidden" onclick="nextQuestion()" id="nextBtn">
-                        Question suivante →
-                    </button>
-                </div>
+                <div class="buttons" style="margin-top: 1.5rem;"><button class="btn btn-secondary hidden" onclick="nextQuestion()" id="nextBtn">Question suivante →</button></div>
+                <div class="game-save-section"><button class="btn btn-save btn-small" onclick="saveGame()">💾 Sauvegarder ma partie</button></div>
             </div>
         </div>
-
-        <!-- End Screen -->
         <div id="endScreen" class="game-card screen hidden">
             <h2>🏆 Quiz terminé !</h2>
-            
-            <div class="final-score" id="finalScore">0</div>
-            <div id="gradeBadge" class="grade-badge"></div>
-            
-            <div class="stats-grid">
-                <div class="stat-card success">
-                    <div class="value" id="finalCorrect">0</div>
-                    <div class="label">Bonnes réponses</div>
-                </div>
-                <div class="stat-card error">
-                    <div class="value" id="finalErrors">0</div>
-                    <div class="label">Erreurs</div>
-                </div>
-                <div class="stat-card warning">
-                    <div class="value" id="finalHelps">0</div>
-                    <div class="label">Aides utilisées</div>
-                </div>
-            </div>
-
+            <div class="final-score" id="finalScore">0</div><div id="gradeBadge" class="grade-badge"></div>
+            <div class="stats-grid"><div class="stat-card success"><div class="value" id="finalCorrect">0</div><div class="label">Bonnes réponses</div></div><div class="stat-card error"><div class="value" id="finalErrors">0</div><div class="label">Erreurs</div></div><div class="stat-card warning"><div class="value" id="finalHelps">0</div><div class="label">Aides utilisées</div></div></div>
             <p id="finalMessage"></p>
-            
-            <div class="end-buttons">
-                <button class="btn btn-pdf" onclick="openPdfModal()">
-                    📄 Générer mon attestation PDF
-                </button>
-                <button class="btn btn-primary" onclick="restartGame()">
-                    🔄 Recommencer le Quiz
-                </button>
-            </div>
+            <div class="end-buttons"><button class="btn btn-pdf" onclick="openPdfModal()">📄 Générer mon attestation PDF</button><button class="btn btn-primary" onclick="restartGame()">🔄 Recommencer le Quiz</button></div>
         </div>
-
-        <footer class="copyright">
-            © <span>Christian S</span> 2025 - Tous droits réservés
-        </footer>
+        <footer class="copyright">© <span>Christian S</span> 2025 - Tous droits réservés</footer>
     </div>
-
     <script>
-        // =====================================================
-        // BASE DE DONNÉES DES 30 SITUATIONS INCOTERMS 2020
-        // =====================================================
         const situations = [
-            // ===== CPT (Carriage Paid To) =====
-            {
-                text: "Vous exportez du linge de maison au Canada. Votre client vous demande d'organiser la logistique à vos frais jusqu'à l'aéroport de Montréal mais accepte le transfert de risques dès le départ du transport principal.",
-                incoterm: "CPT",
-                city: "Montréal",
-                type: "export",
-                hint: "Le vendeur organise et paie le transport, mais les risques passent à l'acheteur au départ. Pas d'assurance mentionnée. Transport aérien = multimodal.",
-                explanation: "CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Montréal, mais les risques sont transférés à l'acheteur dès la remise au premier transporteur. Pas d'assurance incluse (sinon ce serait CIP)."
-            },
-            {
-                text: "Votre fournisseur a organisé le transport de vos marchandises, à vos risques, jusqu'à l'aéroport de Lyon. Vous importez.",
-                incoterm: "CPT",
-                city: "Lyon",
-                type: "import",
-                hint: "Le vendeur paie le transport jusqu'à destination, mais les risques sont pour l'acheteur dès le départ. Pas d'assurance mentionnée.",
-                explanation: "CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Lyon, mais les risques sont transférés à l'acheteur dès la remise au premier transporteur. Pas d'assurance incluse."
-            },
-            {
-                text: "Vous exportez des équipements électroniques vers Singapour. Votre client vous demande de prendre en charge le transport jusqu'au port de Singapour, sans assurance. Il assume les risques dès le chargement du conteneur à Marseille.",
-                incoterm: "CPT",
-                city: "Singapour",
-                type: "export",
-                hint: "Transport payé par le vendeur, risques transférés au départ, pas d'assurance. Conteneur = multimodal.",
-                explanation: "CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Singapour. Les risques passent à l'acheteur dès Marseille. Pas d'assurance (CPT et non CIP). Marchandise conteneurisée donc Incoterm multimodal."
-            },
-
-            // ===== CIP (Carriage and Insurance Paid To) =====
-            {
-                text: "Vous exportez vers le Sénégal. Votre client vous demande d'organiser le transport maritime de deux conteneurs de produits de décoration intérieure jusqu'au port de Dakar et de souscrire une assurance pour son compte. Il accepte le transfert de risque depuis le départ du transport principal.",
-                incoterm: "CIP",
-                city: "Dakar",
-                type: "export",
-                hint: "Transport + assurance payés par le vendeur, risques transférés au départ. Conteneurs = multimodal, donc CIP et non CIF.",
-                explanation: "CIP (Carriage and Insurance Paid to) : le vendeur organise le transport ET l'assurance jusqu'à Dakar. Les risques passent à l'acheteur au départ du transport principal. CIP car marchandises conteneurisées (multimodal)."
-            },
-            {
-                text: "Vous importez de Chine des moteurs emballés dans des caisses en bois conteneurisées par bateau à destination de Tours. Port de débarquement : Le Havre. L'exportateur doit conclure le contrat de transport, assurance comprise. Vous assumez les risques depuis le port de départ.",
-                incoterm: "CIP",
-                city: "Le Havre",
-                type: "import",
-                hint: "Transport + assurance payés par le vendeur. Risques transférés au départ. Conteneurisé = multimodal, pas CIF.",
-                explanation: "CIP (Carriage and Insurance Paid to) : le vendeur paie transport et assurance jusqu'au Havre. Les risques passent à l'acheteur au port de départ en Chine. CIP car marchandises conteneurisées (et non CIF qui est réservé au vrac maritime)."
-            },
-            {
-                text: "Vous exportez des produits pharmaceutiques vers le Brésil. Votre client exige une assurance tous risques et vous demande d'organiser le transport aérien jusqu'à São Paulo. Les risques lui sont transférés dès la remise au transporteur en France.",
-                incoterm: "CIP",
-                city: "São Paulo",
-                type: "export",
-                hint: "Transport aérien + assurance exigée. Risques transférés au départ.",
-                explanation: "CIP (Carriage and Insurance Paid to) : le vendeur paie le transport et l'assurance jusqu'à São Paulo. Transport aérien = multimodal. Risques transférés dès la remise au transporteur."
-            },
-
-            // ===== CFR (Cost and Freight) =====
-            {
-                text: "Vous exportez des tôles en vrac par voie maritime à destination d'Alger (Algérie). Vous voulez bien conclure le contrat de transport principal et assumer les frais mais sans autre démarche.",
-                incoterm: "CFR",
-                city: "Alger",
-                type: "export",
-                hint: "Transport maritime de marchandises en vrac (non conteneurisées). Pas d'assurance. Frais jusqu'au port de destination.",
-                explanation: "CFR (Cost and Freight) : le vendeur paie les frais de transport jusqu'au port d'Alger, mais sans assurance. CFR s'utilise exclusivement pour le transport maritime de marchandises en vrac ou non conteneurisées."
-            },
-            {
-                text: "Vous importez et récupérez vos marchandises non assurées et non conteneurisées, au port d'Anvers, en Belgique, et en organisez le déchargement et le post-acheminement par route jusqu'à vos locaux, à Lille.",
-                incoterm: "CFR",
-                city: "Anvers",
-                type: "import",
-                hint: "Marchandises non conteneurisées arrivant par bateau, sans assurance. Le vendeur a payé le fret jusqu'au port.",
-                explanation: "CFR (Cost and Freight) : le vendeur a payé le transport maritime jusqu'au port d'Anvers. Pas d'assurance incluse. L'acheteur récupère la marchandise au port et organise le reste."
-            },
-            {
-                text: "Vous exportez du minerai de fer en vrac par navire vers le port de Rotterdam. Vous prenez en charge le fret maritime mais pas l'assurance. Les risques passent à l'acheteur dès le chargement sur le navire au port du Havre.",
-                incoterm: "CFR",
-                city: "Rotterdam",
-                type: "export",
-                hint: "Vrac maritime, fret payé par vendeur, pas d'assurance. Risques transférés au chargement.",
-                explanation: "CFR (Cost and Freight) : le vendeur paie le fret jusqu'à Rotterdam. Marchandise en vrac = maritime. Pas d'assurance. Risques transférés dès le chargement sur le navire."
-            },
-
-            // ===== CIF (Cost, Insurance and Freight) =====
-            {
-                text: "Vous exportez du blé en vrac par navire vers Le Pirée (Grèce). Vous devez payer le fret et souscrire une assurance maritime. Les risques sont transférés à l'acheteur dès le chargement sur le navire à Rouen.",
-                incoterm: "CIF",
-                city: "Le Pirée",
-                type: "export",
-                hint: "Vrac maritime + assurance + fret payés. Risques au chargement.",
-                explanation: "CIF (Cost, Insurance and Freight) : le vendeur paie fret et assurance jusqu'au Pirée. Vrac maritime donc CIF (et non CIP). Risques transférés au chargement sur le navire."
-            },
-            {
-                text: "Vous importez du pétrole brut par tanker depuis l'Arabie Saoudite. Votre fournisseur paie le transport et l'assurance jusqu'au port de Fos-sur-Mer. Vous assumez les risques depuis le chargement au port de Djeddah.",
-                incoterm: "CIF",
-                city: "Fos-sur-Mer",
-                type: "import",
-                hint: "Vrac liquide maritime, transport + assurance payés par vendeur, risques au chargement.",
-                explanation: "CIF (Cost, Insurance and Freight) : transport maritime de vrac (pétrole). Le vendeur paie fret et assurance jusqu'à Fos-sur-Mer. Risques transférés au chargement."
-            },
-
-            // ===== FOB (Free On Board) =====
-            {
-                text: "Vous exportez des grumes de bois (en vrac) par bateau. Votre client organise et paie le transport maritime. Votre responsabilité s'arrête une fois la marchandise chargée à bord du navire au port de Bordeaux.",
-                incoterm: "FOB",
-                city: "Bordeaux",
-                type: "export",
-                hint: "Vrac maritime. Le vendeur livre à bord du navire. L'acheteur organise le transport principal.",
-                explanation: "FOB (Free On Board) : le vendeur livre la marchandise chargée sur le navire au port de Bordeaux. Frais et risques sont transférés à l'acheteur dès ce moment. Réservé au vrac maritime."
-            },
-            {
-                text: "Vous importez du coton en balles (non conteneurisé) d'Inde. Votre fournisseur livre la marchandise à bord du navire au port de Mumbai. Vous organisez et payez le transport maritime jusqu'à Marseille.",
-                incoterm: "FOB",
-                city: "Mumbai",
-                type: "import",
-                hint: "Marchandise non conteneurisée, livrée à bord du navire au port de départ. L'acheteur paie le fret.",
-                explanation: "FOB (Free On Board) : le vendeur livre la marchandise à bord du navire à Mumbai. L'acheteur (vous) prend en charge le transport maritime. Risques transférés au chargement."
-            },
-            {
-                text: "Vous exportez des bobines d'acier par cargo. L'acheteur américain a affrété le navire. Vous devez charger la marchandise à bord au port de Dunkerque. Ensuite, c'est son problème.",
-                incoterm: "FOB",
-                city: "Dunkerque",
-                type: "export",
-                hint: "Marchandise chargée sur le navire de l'acheteur. Vrac/non conteneurisé.",
-                explanation: "FOB (Free On Board) : le vendeur livre à bord du navire au port de Dunkerque. L'acheteur a affrété le navire et assume frais et risques dès le chargement."
-            },
-
-            // ===== FAS (Free Alongside Ship) =====
-            {
-                text: "Vous exportez par bateau de la marchandise à destination de Saïgon (Viêt-Nam). Votre client vous demande simplement d'assurer le préacheminement de la marchandise jusqu'au quai d'embarquement au port de Marseille, ainsi que le dédouanement export.",
-                incoterm: "FAS",
-                city: "Marseille",
-                type: "export",
-                hint: "Livraison le long du navire (sur le quai), dédouanée export. L'acheteur prend en charge le chargement sur le navire.",
-                explanation: "FAS (Free Alongside Ship) : le vendeur livre la marchandise le long du navire (sur le quai) au port de Marseille, dédouanée export. L'acheteur assume les risques et coûts à partir de ce point."
-            },
-            {
-                text: "Vous exportez des conteneurs vides (en tant que marchandise) par voie maritime. Votre client japonais organisera le chargement. Vous les déposez sur le quai du port du Havre, dédouanés export.",
-                incoterm: "FAS",
-                city: "Le Havre",
-                type: "export",
-                hint: "Marchandise déposée le long du navire (sur le quai), dédouanée export. L'acheteur charge.",
-                explanation: "FAS (Free Alongside Ship) : le vendeur livre la marchandise sur le quai, le long du navire, au Havre. L'acheteur organise et paie le chargement et le transport."
-            },
-
-            // ===== EXW (Ex Works) =====
-            {
-                text: "Vous achetez des pièces automobiles en Allemagne et prenez la logistique en charge, depuis les locaux de votre fournisseur, à Karlsruhe.",
-                incoterm: "EXW",
-                city: "Karlsruhe",
-                type: "import",
-                hint: "L'acheteur prend tout en charge dès les locaux du vendeur. Minimum d'obligations pour le vendeur.",
-                explanation: "EXW (Ex Works) : le vendeur met la marchandise à disposition dans ses locaux à Karlsruhe. L'acheteur assume tous les coûts et risques dès ce point."
-            },
-            {
-                text: "Vous importez des machines-outils du Japon. Votre fournisseur met la marchandise à votre disposition dans son usine à Osaka. Vous organisez tout : enlèvement, dédouanement export, transport international, etc.",
-                incoterm: "EXW",
-                city: "Osaka",
-                type: "import",
-                hint: "Marchandise disponible chez le vendeur. L'acheteur gère absolument tout.",
-                explanation: "EXW (Ex Works) : le vendeur met la marchandise à disposition dans son usine à Osaka. L'acheteur assume l'intégralité de la logistique, y compris le dédouanement export."
-            },
-            {
-                text: "Un client américain vient chercher votre production directement dans votre entrepôt à Lyon. Il s'occupe de tout le transport et des formalités.",
-                incoterm: "EXW",
-                city: "Lyon",
-                type: "export",
-                hint: "Le client enlève la marchandise chez vous. Aucune obligation logistique pour le vendeur.",
-                explanation: "EXW (Ex Works) : le vendeur met la marchandise à disposition dans son entrepôt à Lyon. L'acheteur prend tout en charge dès l'enlèvement."
-            },
-
-            // ===== FCA (Free Carrier) =====
-            {
-                text: "Vous exportez un conteneur complet de marchandises par la voie maritime. Votre client prendra en charge la logistique depuis le port de Fos-Marseille. La marchandise sera prise en charge dans le camion de pré-acheminement. Vous avez réalisé le dédouanement export.",
-                incoterm: "FCA",
-                city: "Fos-Marseille",
-                type: "export",
-                hint: "Le vendeur remet la marchandise au transporteur désigné par l'acheteur, dédouanée export. Point de transfert : dans le camion.",
-                explanation: "FCA (Free Carrier) : le vendeur livre la marchandise, dédouanée export, au transporteur désigné par l'acheteur à Fos-Marseille. Les risques sont transférés dès le chargement dans le camion."
-            },
-            {
-                text: "Votre entreprise se trouve à Montpellier, vous chargez la marchandise emballée dans le camion du transporteur routier désigné par votre client britannique après avoir réalisé le dédouanement export.",
-                incoterm: "FCA",
-                city: "Montpellier",
-                type: "export",
-                hint: "Remise au transporteur de l'acheteur, marchandise dédouanée export. Le lieu est chez le vendeur.",
-                explanation: "FCA (Free Carrier) : le vendeur livre la marchandise, dédouanée export, au transporteur désigné par l'acheteur à Montpellier. Le chargement dans le camion transfère les risques."
-            },
-            {
-                text: "Vous exportez des produits cosmétiques vers la Suisse. Votre client a mandaté un transporteur pour enlever la marchandise à votre entrepôt de Dijon. Vous effectuez le dédouanement export.",
-                incoterm: "FCA",
-                city: "Dijon",
-                type: "export",
-                hint: "Remise au transporteur de l'acheteur dans les locaux du vendeur, dédouanée export.",
-                explanation: "FCA (Free Carrier) : le vendeur livre la marchandise dédouanée export au transporteur désigné par l'acheteur à Dijon. Risques transférés au chargement."
-            },
-            {
-                text: "Vous importez des vins d'Espagne. Le vendeur remet les palettes au transporteur que vous avez désigné, à son chai de Barcelone, après dédouanement export.",
-                incoterm: "FCA",
-                city: "Barcelone",
-                type: "import",
-                hint: "Le vendeur livre au transporteur de l'acheteur, dédouané export.",
-                explanation: "FCA (Free Carrier) : le vendeur espagnol livre la marchandise, dédouanée export, au transporteur désigné par l'acheteur à Barcelone."
-            },
-
-            // ===== DAP (Delivered At Place) =====
-            {
-                text: "Vous importez du café du Brésil par navire à destination de Nantes. Vous souhaitez uniquement gérer le transport de la marchandise de l'entrepôt de votre transitaire localisé à Nantes à votre entrepôt personnel, après avoir dédouané la marchandise vous-même et payé les droits de douane.",
-                incoterm: "DAP",
-                city: "Nantes",
-                type: "import",
-                hint: "Le vendeur livre la marchandise prête à être déchargée, à destination. L'acheteur gère le dédouanement import.",
-                explanation: "DAP (Delivered At Place) : le vendeur livre la marchandise à destination (entrepôt du transitaire à Nantes), prête à être déchargée. L'acheteur s'occupe du dédouanement import et du transport final."
-            },
-            {
-                text: "Vous livrez un client en Suède et organisez toute la logistique, à vos risques, par avion puis par route, jusqu'à ses locaux à Malmö. La marchandise est prise en charge encore chargée dans le camion.",
-                incoterm: "DAP",
-                city: "Malmö",
-                type: "export",
-                hint: "Le vendeur assume tous les risques et coûts jusqu'à destination, marchandise prête à être déchargée.",
-                explanation: "DAP (Delivered At Place) : le vendeur livre la marchandise à Malmö, à ses risques, prête à être déchargée du camion. L'acheteur s'occupe du déchargement."
-            },
-            {
-                text: "Vous exportez des meubles vers la Pologne. Vous organisez le transport jusqu'à l'entrepôt de votre client à Varsovie. La marchandise arrive dans le camion, prête à être déchargée. Le client gère le dédouanement import.",
-                incoterm: "DAP",
-                city: "Varsovie",
-                type: "export",
-                hint: "Livraison à destination, prête à décharger. L'acheteur dédouane.",
-                explanation: "DAP (Delivered At Place) : le vendeur livre à Varsovie, marchandise prête à être déchargée. L'acheteur effectue le dédouanement import et le déchargement."
-            },
-
-            // ===== DPU (Delivered at Place Unloaded) =====
-            {
-                text: "Vous exportez des machines industrielles vers l'Italie. Vous organisez le transport jusqu'à Milan et vous vous engagez à décharger les machines du camion dans l'entrepôt de votre client. Le client effectue le dédouanement import.",
-                incoterm: "DPU",
-                city: "Milan",
-                type: "export",
-                hint: "Le vendeur livre ET décharge à destination. L'acheteur dédouane import.",
-                explanation: "DPU (Delivered at Place Unloaded) : le vendeur livre la marchandise à Milan et effectue le déchargement. L'acheteur gère le dédouanement import. C'est le seul Incoterm où le vendeur décharge."
-            },
-            {
-                text: "Vous importez des équipements lourds des États-Unis. Votre fournisseur organise le transport jusqu'à votre site de Toulouse et s'engage à décharger les équipements du camion. Vous vous occupez du dédouanement import.",
-                incoterm: "DPU",
-                city: "Toulouse",
-                type: "import",
-                hint: "Le vendeur livre et décharge à destination. L'acheteur dédouane.",
-                explanation: "DPU (Delivered at Place Unloaded) : le vendeur livre à Toulouse ET décharge les équipements. L'acheteur (vous) effectue le dédouanement import."
-            },
-            {
-                text: "Vous exportez des turbines éoliennes vers le Danemark. Vous prenez en charge le transport jusqu'au site de Copenhague et le déchargement des turbines du convoi exceptionnel. Le client danois réalise les formalités d'importation.",
-                incoterm: "DPU",
-                city: "Copenhague",
-                type: "export",
-                hint: "Transport + déchargement par le vendeur. Dédouanement import par l'acheteur.",
-                explanation: "DPU (Delivered at Place Unloaded) : le vendeur livre à Copenhague et décharge les turbines. L'acheteur effectue le dédouanement import."
-            },
-
-            // ===== DDP (Delivered Duty Paid) =====
-            {
-                text: "Vous exportez des produits de luxe vers le Qatar. Votre client exige une livraison \"clé en main\" à son magasin de Doha : transport, assurance, dédouanement import et droits de douane à votre charge.",
-                incoterm: "DDP",
-                city: "Doha",
-                type: "export",
-                hint: "Livraison complète incluant dédouanement import et droits de douane. Maximum d'obligations pour le vendeur.",
-                explanation: "DDP (Delivered Duty Paid) : le vendeur assume tout jusqu'à Doha, y compris le dédouanement import et les droits de douane. Maximum d'obligations pour le vendeur."
-            },
-            {
-                text: "Vous importez des composants électroniques de Taïwan. Votre fournisseur livre à votre usine de Grenoble, dédouane la marchandise à l'import et paie les droits de douane. Vous n'avez qu'à réceptionner.",
-                incoterm: "DDP",
-                city: "Grenoble",
-                type: "import",
-                hint: "Le vendeur gère tout : transport, dédouanement import, droits de douane.",
-                explanation: "DDP (Delivered Duty Paid) : le vendeur taïwanais livre à Grenoble, effectue le dédouanement import et paie les droits de douane. L'acheteur n'a qu'à réceptionner."
-            },
-            {
-                text: "Vous exportez des vêtements vers le Royaume-Uni. Votre client demande une livraison sans aucune formalité de son côté : vous gérez transport, dédouanement UK et acquittez les droits de douane jusqu'à son entrepôt de Londres.",
-                incoterm: "DDP",
-                city: "Londres",
-                type: "export",
-                hint: "Livraison totale incluant formalités douanières import et droits. Le client ne fait rien.",
-                explanation: "DDP (Delivered Duty Paid) : le vendeur livre à Londres en assumant toutes les formalités, y compris le dédouanement import UK et les droits de douane post-Brexit."
-            }
+            {text:"Vous exportez du linge de maison au Canada. Votre client vous demande d'organiser la logistique à vos frais jusqu'à l'aéroport de Montréal mais accepte le transfert de risques dès le départ du transport principal.",incoterm:"CPT",city:"Montréal",type:"export",hint:"Le vendeur organise et paie le transport, mais les risques passent à l'acheteur au départ. Pas d'assurance mentionnée.",explanation:"CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Montréal, mais les risques sont transférés à l'acheteur dès la remise au premier transporteur."},
+            {text:"Votre fournisseur a organisé le transport de vos marchandises, à vos risques, jusqu'à l'aéroport de Lyon. Vous importez.",incoterm:"CPT",city:"Lyon",type:"import",hint:"Le vendeur paie le transport jusqu'à destination, mais les risques sont pour l'acheteur dès le départ.",explanation:"CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Lyon, mais les risques sont transférés à l'acheteur dès la remise au premier transporteur."},
+            {text:"Vous exportez des équipements électroniques vers Singapour. Votre client vous demande de prendre en charge le transport jusqu'au port de Singapour, sans assurance. Il assume les risques dès le chargement du conteneur à Marseille.",incoterm:"CPT",city:"Singapour",type:"export",hint:"Transport payé par le vendeur, risques transférés au départ, pas d'assurance. Conteneur = multimodal.",explanation:"CPT (Carriage Paid To) : le vendeur paie le transport jusqu'à Singapour. Les risques passent à l'acheteur dès Marseille."},
+            {text:"Vous exportez vers le Sénégal. Votre client vous demande d'organiser le transport maritime de deux conteneurs de produits de décoration intérieure jusqu'au port de Dakar et de souscrire une assurance pour son compte. Il accepte le transfert de risque depuis le départ du transport principal.",incoterm:"CIP",city:"Dakar",type:"export",hint:"Transport + assurance payés par le vendeur, risques transférés au départ. Conteneurs = multimodal, donc CIP.",explanation:"CIP (Carriage and Insurance Paid to) : le vendeur organise le transport ET l'assurance jusqu'à Dakar. CIP car conteneurisé."},
+            {text:"Vous importez de Chine des moteurs emballés dans des caisses en bois conteneurisées par bateau à destination de Tours. Port de débarquement : Le Havre. L'exportateur doit conclure le contrat de transport, assurance comprise. Vous assumez les risques depuis le port de départ.",incoterm:"CIP",city:"Le Havre",type:"import",hint:"Transport + assurance payés par le vendeur. Risques transférés au départ. Conteneurisé = multimodal.",explanation:"CIP (Carriage and Insurance Paid to) : le vendeur paie transport et assurance jusqu'au Havre. CIP car conteneurisé."},
+            {text:"Vous exportez des produits pharmaceutiques vers le Brésil. Votre client exige une assurance tous risques et vous demande d'organiser le transport aérien jusqu'à São Paulo. Les risques lui sont transférés dès la remise au transporteur en France.",incoterm:"CIP",city:"São Paulo",type:"export",hint:"Transport aérien + assurance exigée. Risques transférés au départ.",explanation:"CIP (Carriage and Insurance Paid to) : le vendeur paie le transport et l'assurance jusqu'à São Paulo."},
+            {text:"Vous exportez des tôles en vrac par voie maritime à destination d'Alger (Algérie). Vous voulez bien conclure le contrat de transport principal et assumer les frais mais sans autre démarche.",incoterm:"CFR",city:"Alger",type:"export",hint:"Transport maritime de marchandises en vrac. Pas d'assurance. Frais jusqu'au port de destination.",explanation:"CFR (Cost and Freight) : le vendeur paie les frais de transport jusqu'au port d'Alger, mais sans assurance."},
+            {text:"Vous importez et récupérez vos marchandises non assurées et non conteneurisées, au port d'Anvers, en Belgique, et en organisez le déchargement et le post-acheminement par route jusqu'à vos locaux, à Lille.",incoterm:"CFR",city:"Anvers",type:"import",hint:"Marchandises non conteneurisées arrivant par bateau, sans assurance.",explanation:"CFR (Cost and Freight) : le vendeur a payé le transport maritime jusqu'au port d'Anvers. Pas d'assurance."},
+            {text:"Vous exportez du minerai de fer en vrac par navire vers le port de Rotterdam. Vous prenez en charge le fret maritime mais pas l'assurance. Les risques passent à l'acheteur dès le chargement sur le navire au port du Havre.",incoterm:"CFR",city:"Rotterdam",type:"export",hint:"Vrac maritime, fret payé par vendeur, pas d'assurance.",explanation:"CFR (Cost and Freight) : le vendeur paie le fret jusqu'à Rotterdam. Vrac maritime."},
+            {text:"Vous exportez du blé en vrac par navire vers Le Pirée (Grèce). Vous devez payer le fret et souscrire une assurance maritime. Les risques sont transférés à l'acheteur dès le chargement sur le navire à Rouen.",incoterm:"CIF",city:"Le Pirée",type:"export",hint:"Vrac maritime + assurance + fret payés.",explanation:"CIF (Cost, Insurance and Freight) : le vendeur paie fret et assurance jusqu'au Pirée. Vrac maritime."},
+            {text:"Vous importez du pétrole brut par tanker depuis l'Arabie Saoudite. Votre fournisseur paie le transport et l'assurance jusqu'au port de Fos-sur-Mer. Vous assumez les risques depuis le chargement au port de Djeddah.",incoterm:"CIF",city:"Fos-sur-Mer",type:"import",hint:"Vrac liquide maritime, transport + assurance payés par vendeur.",explanation:"CIF (Cost, Insurance and Freight) : transport maritime de vrac (pétrole). Le vendeur paie fret et assurance."},
+            {text:"Vous exportez des grumes de bois (en vrac) par bateau. Votre client organise et paie le transport maritime. Votre responsabilité s'arrête une fois la marchandise chargée à bord du navire au port de Bordeaux.",incoterm:"FOB",city:"Bordeaux",type:"export",hint:"Vrac maritime. Le vendeur livre à bord du navire.",explanation:"FOB (Free On Board) : le vendeur livre la marchandise chargée sur le navire au port de Bordeaux."},
+            {text:"Vous importez du coton en balles (non conteneurisé) d'Inde. Votre fournisseur livre la marchandise à bord du navire au port de Mumbai. Vous organisez et payez le transport maritime jusqu'à Marseille.",incoterm:"FOB",city:"Mumbai",type:"import",hint:"Marchandise non conteneurisée, livrée à bord du navire au port de départ.",explanation:"FOB (Free On Board) : le vendeur livre la marchandise à bord du navire à Mumbai."},
+            {text:"Vous exportez des bobines d'acier par cargo. L'acheteur américain a affrété le navire. Vous devez charger la marchandise à bord au port de Dunkerque. Ensuite, c'est son problème.",incoterm:"FOB",city:"Dunkerque",type:"export",hint:"Marchandise chargée sur le navire de l'acheteur. Vrac/non conteneurisé.",explanation:"FOB (Free On Board) : le vendeur livre à bord du navire au port de Dunkerque."},
+            {text:"Vous exportez par bateau de la marchandise à destination de Saïgon (Viêt-Nam). Votre client vous demande simplement d'assurer le préacheminement de la marchandise jusqu'au quai d'embarquement au port de Marseille, ainsi que le dédouanement export.",incoterm:"FAS",city:"Marseille",type:"export",hint:"Livraison le long du navire (sur le quai), dédouanée export.",explanation:"FAS (Free Alongside Ship) : le vendeur livre la marchandise le long du navire au port de Marseille."},
+            {text:"Vous exportez des conteneurs vides (en tant que marchandise) par voie maritime. Votre client japonais organisera le chargement. Vous les déposez sur le quai du port du Havre, dédouanés export.",incoterm:"FAS",city:"Le Havre",type:"export",hint:"Marchandise déposée le long du navire (sur le quai), dédouanée export.",explanation:"FAS (Free Alongside Ship) : le vendeur livre la marchandise sur le quai, le long du navire."},
+            {text:"Vous achetez des pièces automobiles en Allemagne et prenez la logistique en charge, depuis les locaux de votre fournisseur, à Karlsruhe.",incoterm:"EXW",city:"Karlsruhe",type:"import",hint:"L'acheteur prend tout en charge dès les locaux du vendeur.",explanation:"EXW (Ex Works) : le vendeur met la marchandise à disposition dans ses locaux à Karlsruhe."},
+            {text:"Vous importez des machines-outils du Japon. Votre fournisseur met la marchandise à votre disposition dans son usine à Osaka. Vous organisez tout : enlèvement, dédouanement export, transport international, etc.",incoterm:"EXW",city:"Osaka",type:"import",hint:"Marchandise disponible chez le vendeur. L'acheteur gère absolument tout.",explanation:"EXW (Ex Works) : le vendeur met la marchandise à disposition dans son usine à Osaka."},
+            {text:"Un client américain vient chercher votre production directement dans votre entrepôt à Lyon. Il s'occupe de tout le transport et des formalités.",incoterm:"EXW",city:"Lyon",type:"export",hint:"Le client enlève la marchandise chez vous. Aucune obligation logistique pour le vendeur.",explanation:"EXW (Ex Works) : le vendeur met la marchandise à disposition dans son entrepôt à Lyon."},
+            {text:"Vous exportez un conteneur complet de marchandises par la voie maritime. Votre client prendra en charge la logistique depuis le port de Fos-Marseille. La marchandise sera prise en charge dans le camion de pré-acheminement. Vous avez réalisé le dédouanement export.",incoterm:"FCA",city:"Fos-Marseille",type:"export",hint:"Le vendeur remet la marchandise au transporteur désigné par l'acheteur, dédouanée export.",explanation:"FCA (Free Carrier) : le vendeur livre la marchandise, dédouanée export, au transporteur désigné."},
+            {text:"Votre entreprise se trouve à Montpellier, vous chargez la marchandise emballée dans le camion du transporteur routier désigné par votre client britannique après avoir réalisé le dédouanement export.",incoterm:"FCA",city:"Montpellier",type:"export",hint:"Remise au transporteur de l'acheteur, marchandise dédouanée export.",explanation:"FCA (Free Carrier) : le vendeur livre la marchandise, dédouanée export, au transporteur désigné."},
+            {text:"Vous exportez des produits cosmétiques vers la Suisse. Votre client a mandaté un transporteur pour enlever la marchandise à votre entrepôt de Dijon. Vous effectuez le dédouanement export.",incoterm:"FCA",city:"Dijon",type:"export",hint:"Remise au transporteur de l'acheteur dans les locaux du vendeur, dédouanée export.",explanation:"FCA (Free Carrier) : le vendeur livre la marchandise dédouanée export au transporteur désigné à Dijon."},
+            {text:"Vous importez des vins d'Espagne. Le vendeur remet les palettes au transporteur que vous avez désigné, à son chai de Barcelone, après dédouanement export.",incoterm:"FCA",city:"Barcelone",type:"import",hint:"Le vendeur livre au transporteur de l'acheteur, dédouané export.",explanation:"FCA (Free Carrier) : le vendeur espagnol livre la marchandise, dédouanée export, au transporteur désigné."},
+            {text:"Vous importez du café du Brésil par navire à destination de Nantes. Vous souhaitez uniquement gérer le transport de la marchandise de l'entrepôt de votre transitaire localisé à Nantes à votre entrepôt personnel, après avoir dédouané la marchandise vous-même et payé les droits de douane.",incoterm:"DAP",city:"Nantes",type:"import",hint:"Le vendeur livre la marchandise prête à être déchargée, à destination. L'acheteur gère le dédouanement import.",explanation:"DAP (Delivered At Place) : le vendeur livre la marchandise à destination, prête à être déchargée."},
+            {text:"Vous livrez un client en Suède et organisez toute la logistique, à vos risques, par avion puis par route, jusqu'à ses locaux à Malmö. La marchandise est prise en charge encore chargée dans le camion.",incoterm:"DAP",city:"Malmö",type:"export",hint:"Le vendeur assume tous les risques et coûts jusqu'à destination, marchandise prête à être déchargée.",explanation:"DAP (Delivered At Place) : le vendeur livre la marchandise à Malmö, à ses risques, prête à être déchargée."},
+            {text:"Vous exportez des meubles vers la Pologne. Vous organisez le transport jusqu'à l'entrepôt de votre client à Varsovie. La marchandise arrive dans le camion, prête à être déchargée. Le client gère le dédouanement import.",incoterm:"DAP",city:"Varsovie",type:"export",hint:"Livraison à destination, prête à décharger. L'acheteur dédouane.",explanation:"DAP (Delivered At Place) : le vendeur livre à Varsovie, marchandise prête à être déchargée."},
+            {text:"Vous exportez des machines industrielles vers l'Italie. Vous organisez le transport jusqu'à Milan et vous vous engagez à décharger les machines du camion dans l'entrepôt de votre client. Le client effectue le dédouanement import.",incoterm:"DPU",city:"Milan",type:"export",hint:"Le vendeur livre ET décharge à destination. L'acheteur dédouane import.",explanation:"DPU (Delivered at Place Unloaded) : le vendeur livre la marchandise à Milan et effectue le déchargement."},
+            {text:"Vous importez des équipements lourds des États-Unis. Votre fournisseur organise le transport jusqu'à votre site de Toulouse et s'engage à décharger les équipements du camion. Vous vous occupez du dédouanement import.",incoterm:"DPU",city:"Toulouse",type:"import",hint:"Le vendeur livre et décharge à destination. L'acheteur dédouane.",explanation:"DPU (Delivered at Place Unloaded) : le vendeur livre à Toulouse ET décharge les équipements."},
+            {text:"Vous exportez des turbines éoliennes vers le Danemark. Vous prenez en charge le transport jusqu'au site de Copenhague et le déchargement des turbines du convoi exceptionnel. Le client danois réalise les formalités d'importation.",incoterm:"DPU",city:"Copenhague",type:"export",hint:"Transport + déchargement par le vendeur. Dédouanement import par l'acheteur.",explanation:"DPU (Delivered at Place Unloaded) : le vendeur livre à Copenhague et décharge les turbines."},
+            {text:"Vous exportez des produits de luxe vers le Qatar. Votre client exige une livraison \"clé en main\" à son magasin de Doha : transport, assurance, dédouanement import et droits de douane à votre charge.",incoterm:"DDP",city:"Doha",type:"export",hint:"Livraison complète incluant dédouanement import et droits de douane.",explanation:"DDP (Delivered Duty Paid) : le vendeur assume tout jusqu'à Doha, y compris le dédouanement import."},
+            {text:"Vous importez des composants électroniques de Taïwan. Votre fournisseur livre à votre usine de Grenoble, dédouane la marchandise à l'import et paie les droits de douane. Vous n'avez qu'à réceptionner.",incoterm:"DDP",city:"Grenoble",type:"import",hint:"Le vendeur gère tout : transport, dédouanement import, droits de douane.",explanation:"DDP (Delivered Duty Paid) : le vendeur taïwanais livre à Grenoble, effectue le dédouanement import."},
+            {text:"Vous exportez des vêtements vers le Royaume-Uni. Votre client demande une livraison sans aucune formalité de son côté : vous gérez transport, dédouanement UK et acquittez les droits de douane jusqu'à son entrepôt de Londres.",incoterm:"DDP",city:"Londres",type:"export",hint:"Livraison totale incluant formalités douanières import et droits.",explanation:"DDP (Delivered Duty Paid) : le vendeur livre à Londres en assumant toutes les formalités."}
         ];
-
-        // Game state
-        let currentIndex = 0;
-        let score = 0;
-        let correctAnswers = 0;
-        let errors = 0;
-        let helpsUsed = 0;
-        let shuffledSituations = [];
-        let helpUsedForCurrent = false;
-        let answered = false;
-        let questionCount = 30;
-        let gameStartTime = null;
-        let gameEndTime = null;
-        
-        // Store answers for PDF
-        let answersHistory = [];
-
-        // Shuffle array
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        // Normalize city name for comparison (case-insensitive, accent-insensitive)
-        function normalizeCity(city) {
-            return city.toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                .replace(/[-\s]/g, "")
-                .trim();
-        }
-
-        // ===== CELEBRATION EFFECTS =====
-        function createConfetti() {
-            const container = document.getElementById('confettiContainer');
-            container.innerHTML = '';
-            
-            const colors = ['#10B981', '#F59E0B', '#FF6B35', '#3B82F6', '#8B5CF6'];
-            const shapes = ['●', '■', '▲', '★'];
-            
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.fontSize = (Math.random() * 10 + 8) + 'px';
-                confetti.style.animation = `confettiFall ${Math.random() * 1 + 1.5}s ease-out forwards`;
-                confetti.style.animationDelay = Math.random() * 0.3 + 's';
-                container.appendChild(confetti);
-            }
-            
-            setTimeout(() => { container.innerHTML = ''; }, 2500);
-        }
-
-        function showSuccessGlow() {
-            const glow = document.getElementById('successGlow');
-            glow.classList.remove('active');
-            void glow.offsetWidth;
-            glow.classList.add('active');
-        }
-
-        function showScorePopup() {
-            const popup = document.getElementById('scorePopup');
-            popup.classList.remove('active');
-            void popup.offsetWidth;
-            popup.classList.add('active');
-        }
-
-        function createStarBurst() {
-            const container = document.getElementById('starBurst');
-            container.innerHTML = '';
-            
-            const stars = ['⭐', '✨', '🌟'];
-            const angles = [0, 45, 90, 135, 180, 225, 270, 315];
-            
-            angles.forEach((angle, i) => {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.textContent = stars[i % stars.length];
-                
-                const radians = angle * Math.PI / 180;
-                const distance = 80;
-                const tx = Math.cos(radians) * distance;
-                const ty = Math.sin(radians) * distance;
-                
-                star.style.setProperty('--tx', tx + 'px');
-                star.style.setProperty('--ty', ty + 'px');
-                star.style.left = '50%';
-                star.style.top = '50%';
-                star.style.animation = `starBurst 0.8s ease-out forwards`;
-                star.style.animationDelay = (i * 0.05) + 's';
-                
-                container.appendChild(star);
-            });
-            
-            setTimeout(() => { container.innerHTML = ''; }, 1000);
-        }
-
-        function celebrateCorrectAnswer() {
-            createConfetti();
-            showSuccessGlow();
-            showScorePopup();
-            createStarBurst();
-        }
-
-        // Start game
-        function startGame() {
-            questionCount = parseInt(document.getElementById('questionCount').value);
-            shuffledSituations = shuffleArray(situations).slice(0, questionCount);
-            currentIndex = 0;
-            score = 0;
-            correctAnswers = 0;
-            errors = 0;
-            helpsUsed = 0;
-            gameStartTime = new Date();
-            answersHistory = [];
-            
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('endScreen').classList.add('hidden');
-            document.getElementById('gameScreen').classList.remove('hidden');
-            
-            updateDisplay();
-            loadQuestion();
-        }
-
-        // Load question
-        function loadQuestion() {
-            const situation = shuffledSituations[currentIndex];
-            
-            document.getElementById('situationType').innerHTML = 
-                situation.type === 'export' ? '📤 Export' : '📥 Import';
-            document.getElementById('situationText').textContent = situation.text;
-            
-            // Reset inputs
-            document.getElementById('incoterm').value = '';
-            document.getElementById('city').value = '';
-            
-            // Reset state
-            helpUsedForCurrent = false;
-            answered = false;
-            
-            // Reset buttons
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('helpBtn').disabled = false;
-            document.getElementById('nextBtn').classList.add('hidden');
-            document.getElementById('feedback').classList.add('hidden');
-            
-            // Update progress
-            updateProgress();
-        }
-
-        // Update display
-        function updateDisplay() {
-            document.getElementById('currentScore').textContent = score;
-            document.getElementById('correctCount').textContent = correctAnswers;
-            document.getElementById('errorCount').textContent = errors;
-            
-            const scoreEl = document.getElementById('currentScore');
-            scoreEl.className = 'score-value';
-            if (score > 0) scoreEl.classList.add('positive');
-            else if (score < 0) scoreEl.classList.add('negative');
-        }
-
-        // Update progress
-        function updateProgress() {
-            document.getElementById('currentQuestion').textContent = currentIndex + 1;
-            document.getElementById('totalQuestions').textContent = shuffledSituations.length;
-            
-            const percent = Math.round(((currentIndex) / shuffledSituations.length) * 100);
-            document.getElementById('progressPercent').textContent = percent + '%';
-            document.getElementById('progressFill').style.width = percent + '%';
-        }
-
-        // Show help
-        function showHelp() {
-            if (helpUsedForCurrent || answered) return;
-            
-            helpUsedForCurrent = true;
-            helpsUsed++;
-            score -= 2;
-            updateDisplay();
-            
-            const situation = shuffledSituations[currentIndex];
-            const feedback = document.getElementById('feedback');
-            
-            feedback.className = 'feedback help';
-            feedback.innerHTML = `
-                <div class="feedback-header">
-                    <span class="feedback-icon">💡</span>
-                    Indice (-2 points)
-                </div>
-                <div class="feedback-text">${situation.hint}</div>
-            `;
-            feedback.classList.remove('hidden');
-            
-            document.getElementById('helpBtn').disabled = true;
-        }
-
-        // Submit answer
-        function submitAnswer() {
-            if (answered) return;
-            
-            const selectedIncoterm = document.getElementById('incoterm').value;
-            const enteredCity = document.getElementById('city').value.trim();
-            
-            if (!selectedIncoterm || !enteredCity) {
-                alert('Veuillez sélectionner un Incoterm et entrer une ville.');
-                return;
-            }
-            
-            answered = true;
-            const situation = shuffledSituations[currentIndex];
-            const feedback = document.getElementById('feedback');
-            
-            const incotermCorrect = selectedIncoterm === situation.incoterm;
-            const cityCorrect = normalizeCity(enteredCity) === normalizeCity(situation.city);
-            const isCorrect = incotermCorrect && cityCorrect;
-            
-            // Store answer for PDF
-            answersHistory.push({
-                questionNum: currentIndex + 1,
-                type: situation.type,
-                expectedIncoterm: situation.incoterm,
-                expectedCity: situation.city,
-                givenIncoterm: selectedIncoterm,
-                givenCity: enteredCity,
-                isCorrect: isCorrect,
-                usedHelp: helpUsedForCurrent
-            });
-            
-            if (isCorrect) {
-                score += 5;
-                correctAnswers++;
-                
-                // Trigger celebration
-                celebrateCorrectAnswer();
-                
-                feedback.className = 'feedback correct';
-                feedback.innerHTML = `
-                    <div class="feedback-header">
-                        <span class="feedback-icon">✅</span>
-                        Excellente réponse ! (+5 points)
-                    </div>
-                    <div class="feedback-text">${situation.explanation}</div>
-                `;
-            } else {
-                score -= 3;
-                errors++;
-                
-                let errorDetail = '';
-                if (!incotermCorrect && !cityCorrect) {
-                    errorDetail = `L'Incoterm et la ville sont incorrects.`;
-                } else if (!incotermCorrect) {
-                    errorDetail = `L'Incoterm est incorrect (vous avez mis ${selectedIncoterm}).`;
-                } else {
-                    errorDetail = `La ville est incorrecte (vous avez mis ${enteredCity}).`;
-                }
-                
-                feedback.className = 'feedback incorrect';
-                feedback.innerHTML = `
-                    <div class="feedback-header">
-                        <span class="feedback-icon">❌</span>
-                        Réponse incorrecte (-3 points)
-                    </div>
-                    <div class="feedback-text">${errorDetail}</div>
-                    <div class="correct-answer">✓ Bonne réponse : ${situation.incoterm} ${situation.city}</div>
-                    <div class="feedback-text" style="margin-top: 1rem;">${situation.explanation}</div>
-                `;
-            }
-            
-            feedback.classList.remove('hidden');
-            updateDisplay();
-            
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('helpBtn').disabled = true;
-            document.getElementById('nextBtn').classList.remove('hidden');
-        }
-
-        // Next question
-        function nextQuestion() {
-            currentIndex++;
-            
-            if (currentIndex >= shuffledSituations.length) {
-                endGame();
-            } else {
-                loadQuestion();
-            }
-        }
-
-        // End game
-        function endGame() {
-            gameEndTime = new Date();
-            
-            document.getElementById('gameScreen').classList.add('hidden');
-            document.getElementById('endScreen').classList.remove('hidden');
-            
-            document.getElementById('finalScore').textContent = score + ' pts';
-            document.getElementById('finalCorrect').textContent = correctAnswers;
-            document.getElementById('finalErrors').textContent = errors;
-            document.getElementById('finalHelps').textContent = helpsUsed;
-            
-            // Calculate grade
-            const percentage = (correctAnswers / shuffledSituations.length) * 100;
-            const gradeBadge = document.getElementById('gradeBadge');
-            const finalMessage = document.getElementById('finalMessage');
-            
-            if (percentage >= 90) {
-                gradeBadge.className = 'grade-badge grade-excellent';
-                gradeBadge.textContent = '🏆 Expert Incoterms';
-                finalMessage.textContent = 'Félicitations ! Vous maîtrisez parfaitement les Incoterms 2020 !';
-            } else if (percentage >= 70) {
-                gradeBadge.className = 'grade-badge grade-good';
-                gradeBadge.textContent = '⭐ Très bien';
-                finalMessage.textContent = 'Bravo ! Vous avez une bonne maîtrise des Incoterms.';
-            } else if (percentage >= 50) {
-                gradeBadge.className = 'grade-badge grade-average';
-                gradeBadge.textContent = '📚 En progression';
-                finalMessage.textContent = 'Continuez vos révisions pour consolider vos acquis.';
-            } else {
-                gradeBadge.className = 'grade-badge grade-poor';
-                gradeBadge.textContent = '📖 À réviser';
-                finalMessage.textContent = 'Reprenez les bases des Incoterms 2020 et réessayez !';
-            }
-        }
-
-        // Restart game
-        function restartGame() {
-            document.getElementById('endScreen').classList.add('hidden');
-            document.getElementById('startScreen').classList.remove('hidden');
-        }
-
-        // ===== PDF GENERATION =====
-        function openPdfModal() {
-            document.getElementById('pdfModal').classList.remove('hidden');
-            document.getElementById('studentLastName').focus();
-        }
-
-        function closePdfModal() {
-            document.getElementById('pdfModal').classList.add('hidden');
-        }
-
-        function generatePDF() {
-            const lastName = document.getElementById('studentLastName').value.trim();
-            const firstName = document.getElementById('studentFirstName').value.trim();
-            const studentClass = document.getElementById('studentClass').value.trim();
-
-            if (!lastName || !firstName || !studentClass) {
-                alert('Veuillez remplir tous les champs obligatoires.');
-                return;
-            }
-
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            const percentage = Math.round((correctAnswers / shuffledSituations.length) * 100);
-            let grade = '';
-            let gradeColor = [0, 0, 0];
-            
-            if (percentage >= 90) {
-                grade = 'Expert Incoterms';
-                gradeColor = [16, 185, 129];
-            } else if (percentage >= 70) {
-                grade = 'Tres bien';
-                gradeColor = [59, 130, 246];
-            } else if (percentage >= 50) {
-                grade = 'En progression';
-                gradeColor = [245, 158, 11];
-            } else {
-                grade = 'A reviser';
-                gradeColor = [239, 68, 68];
-            }
-
-            // Calculate duration
-            const duration = Math.round((gameEndTime - gameStartTime) / 1000 / 60);
-            const durationText = duration < 1 ? "moins d'1 minute" : `${duration} minute${duration > 1 ? 's' : ''}`;
-
-            // Format dates
-            const dateOptions = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
-            const dateStr = gameEndTime.toLocaleDateString('fr-FR', dateOptions);
-
-            // ===== PAGE 1 - RÉSULTATS =====
-            
-            // Header background
-            doc.setFillColor(26, 26, 46);
-            doc.rect(0, 0, 210, 45, 'F');
-
-            // Header accent line
-            doc.setFillColor(255, 107, 53);
-            doc.rect(0, 45, 210, 2, 'F');
-
-            // Title
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(22);
-            doc.setFont('helvetica', 'bold');
-            doc.text('ATTESTATION DE RESULTATS', 105, 22, { align: 'center' });
-            
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text('Quiz Incoterms 2020 - BTS Commerce International', 105, 35, { align: 'center' });
-
-            // Student info section
-            doc.setTextColor(60, 60, 60);
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('INFORMATIONS ETUDIANT', 20, 60);
-
-            doc.setDrawColor(200, 200, 200);
-            doc.line(20, 63, 190, 63);
-
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
-            
-            doc.text(`Nom : ${lastName.toUpperCase()}`, 20, 72);
-            doc.text(`Prenom : ${firstName}`, 105, 72);
-            doc.text(`Classe : ${studentClass}`, 20, 80);
-            doc.text(`Date : ${dateStr}`, 105, 80);
-            doc.text(`Duree : ${durationText}`, 20, 88);
-
-            // Results section
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('RESULTATS', 20, 102);
-            doc.line(20, 105, 190, 105);
-
-            // Score box
-            doc.setFillColor(245, 245, 245);
-            doc.roundedRect(20, 110, 170, 35, 3, 3, 'F');
-
-            // Grade badge
-            doc.setFillColor(...gradeColor);
-            doc.roundedRect(25, 115, 45, 15, 2, 2, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'bold');
-            doc.text(grade, 47.5, 124, { align: 'center' });
-
-            // Score
-            doc.setTextColor(255, 107, 53);
-            doc.setFontSize(24);
-            doc.text(`${score} pts`, 115, 128, { align: 'center' });
-
-            // Percentage
-            doc.setTextColor(100, 100, 100);
-            doc.setFontSize(11);
-            doc.text(`${percentage}% de reussite`, 165, 128, { align: 'center' });
-
-            // Mini stats
-            doc.setFontSize(9);
-            doc.setTextColor(80, 80, 80);
-            doc.text(`${correctAnswers} bonnes reponses`, 25, 140);
-            doc.text(`${errors} erreurs`, 80, 140);
-            doc.text(`${helpsUsed} aides`, 120, 140);
-            doc.text(`${shuffledSituations.length} questions`, 155, 140);
-
-            // Questions recap title
-            doc.setTextColor(60, 60, 60);
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('DETAIL DES REPONSES', 20, 158);
-            doc.line(20, 161, 190, 161);
-
-            // Table header
-            const tableStartY = 166;
-            doc.setFillColor(26, 26, 46);
-            doc.rect(20, tableStartY, 170, 8, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(8);
-            doc.setFont('helvetica', 'bold');
-            doc.text('N°', 24, tableStartY + 5.5);
-            doc.text('Type', 35, tableStartY + 5.5);
-            doc.text('Reponse attendue', 58, tableStartY + 5.5);
-            doc.text('Votre reponse', 110, tableStartY + 5.5);
-            doc.text('Aide', 155, tableStartY + 5.5);
-            doc.text('Statut', 172, tableStartY + 5.5);
-
-            // Table rows
-            doc.setFont('helvetica', 'normal');
-            let currentY = tableStartY + 8;
-            const rowHeight = 7;
-            const maxRowsPage1 = 14;
-
-            answersHistory.slice(0, maxRowsPage1).forEach((answer, i) => {
-                // Alternate row colors
-                if (i % 2 === 0) {
-                    doc.setFillColor(250, 250, 250);
-                    doc.rect(20, currentY, 170, rowHeight, 'F');
-                }
-
-                doc.setTextColor(60, 60, 60);
-                doc.setFontSize(7);
-                
-                // Question number
-                doc.text(String(answer.questionNum), 24, currentY + 5);
-                
-                // Type (Export/Import)
-                doc.text(answer.type === 'export' ? 'EXP' : 'IMP', 35, currentY + 5);
-                
-                // Expected answer
-                doc.text(`${answer.expectedIncoterm} ${answer.expectedCity}`, 58, currentY + 5);
-                
-                // Given answer
-                const givenText = `${answer.givenIncoterm} ${answer.givenCity}`;
-                doc.text(givenText.substring(0, 25), 110, currentY + 5);
-                
-                // Help used
-                doc.text(answer.usedHelp ? 'Oui' : '-', 158, currentY + 5);
-                
-                // Status with color
-                if (answer.isCorrect) {
-                    doc.setFillColor(16, 185, 129);
-                    doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFontSize(6);
-                    doc.text('CORRECT', 177, currentY + 4.5, { align: 'center' });
-                } else {
-                    doc.setFillColor(239, 68, 68);
-                    doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFontSize(6);
-                    doc.text('FAUX', 177, currentY + 4.5, { align: 'center' });
-                }
-
-                currentY += rowHeight;
-            });
-
-            // Footer page 1
-            doc.setFillColor(26, 26, 46);
-            doc.rect(0, 287, 210, 10, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(7);
-            doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International', 105, 293, { align: 'center' });
-            doc.text('Page 1/' + (answersHistory.length > maxRowsPage1 ? '2' : '1'), 190, 293);
-
-            // ===== PAGE 2 (if needed) =====
-            if (answersHistory.length > maxRowsPage1) {
-                doc.addPage();
-
-                // Header page 2
-                doc.setFillColor(26, 26, 46);
-                doc.rect(0, 0, 210, 25, 'F');
-                doc.setFillColor(255, 107, 53);
-                doc.rect(0, 25, 210, 2, 'F');
-
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(14);
-                doc.setFont('helvetica', 'bold');
-                doc.text('DETAIL DES REPONSES (suite)', 105, 16, { align: 'center' });
-
-                // Student name reminder
-                doc.setTextColor(100, 100, 100);
-                doc.setFontSize(9);
-                doc.setFont('helvetica', 'normal');
-                doc.text(`${firstName} ${lastName.toUpperCase()} - ${studentClass}`, 20, 38);
-
-                // Table header page 2
-                const table2StartY = 45;
-                doc.setFillColor(26, 26, 46);
-                doc.rect(20, table2StartY, 170, 8, 'F');
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(8);
-                doc.setFont('helvetica', 'bold');
-                doc.text('N°', 24, table2StartY + 5.5);
-                doc.text('Type', 35, table2StartY + 5.5);
-                doc.text('Reponse attendue', 58, table2StartY + 5.5);
-                doc.text('Votre reponse', 110, table2StartY + 5.5);
-                doc.text('Aide', 155, table2StartY + 5.5);
-                doc.text('Statut', 172, table2StartY + 5.5);
-
-                // Remaining rows
-                doc.setFont('helvetica', 'normal');
-                currentY = table2StartY + 8;
-
-                answersHistory.slice(maxRowsPage1).forEach((answer, i) => {
-                    if (i % 2 === 0) {
-                        doc.setFillColor(250, 250, 250);
-                        doc.rect(20, currentY, 170, rowHeight, 'F');
-                    }
-
-                    doc.setTextColor(60, 60, 60);
-                    doc.setFontSize(7);
-                    
-                    doc.text(String(answer.questionNum), 24, currentY + 5);
-                    doc.text(answer.type === 'export' ? 'EXP' : 'IMP', 35, currentY + 5);
-                    doc.text(`${answer.expectedIncoterm} ${answer.expectedCity}`, 58, currentY + 5);
-                    doc.text(`${answer.givenIncoterm} ${answer.givenCity}`.substring(0, 25), 110, currentY + 5);
-                    doc.text(answer.usedHelp ? 'Oui' : '-', 158, currentY + 5);
-                    
-                    if (answer.isCorrect) {
-                        doc.setFillColor(16, 185, 129);
-                        doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
-                        doc.setTextColor(255, 255, 255);
-                        doc.setFontSize(6);
-                        doc.text('CORRECT', 177, currentY + 4.5, { align: 'center' });
-                    } else {
-                        doc.setFillColor(239, 68, 68);
-                        doc.roundedRect(168, currentY + 1.5, 18, 4, 1, 1, 'F');
-                        doc.setTextColor(255, 255, 255);
-                        doc.setFontSize(6);
-                        doc.text('FAUX', 177, currentY + 4.5, { align: 'center' });
-                    }
-
-                    currentY += rowHeight;
-                });
-
-                // Summary at end of page 2
-                currentY += 10;
-                doc.setFillColor(245, 245, 245);
-                doc.roundedRect(20, currentY, 170, 25, 3, 3, 'F');
-                
-                doc.setTextColor(60, 60, 60);
-                doc.setFontSize(9);
-                doc.setFont('helvetica', 'bold');
-                doc.text('RECAPITULATIF', 105, currentY + 8, { align: 'center' });
-                
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(8);
-                const correctPct = Math.round((correctAnswers / shuffledSituations.length) * 100);
-                doc.setTextColor(16, 185, 129);
-                doc.text(`Reponses correctes: ${correctAnswers}/${shuffledSituations.length} (${correctPct}%)`, 30, currentY + 18);
-                doc.setTextColor(239, 68, 68);
-                doc.text(`Erreurs: ${errors}`, 100, currentY + 18);
-                doc.setTextColor(245, 158, 11);
-                doc.text(`Aides: ${helpsUsed}`, 140, currentY + 18);
-
-                // Footer page 2
-                doc.setFillColor(26, 26, 46);
-                doc.rect(0, 287, 210, 10, 'F');
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(7);
-                doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International', 105, 293, { align: 'center' });
-                doc.text('Page 2/2', 190, 293);
-            }
-
-            // Save PDF
-            const filename = `Quiz_Incoterms_${lastName.toUpperCase()}_${firstName}_${new Date().toISOString().slice(0,10)}.pdf`;
-            doc.save(filename);
-
-            closePdfModal();
-        }
-
-        // Close modal on outside click
-        document.getElementById('pdfModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePdfModal();
-            }
-        });
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePdfModal();
-            }
-        });
+        let currentIndex=0,score=0,correctAnswers=0,errors=0,helpsUsed=0,shuffledSituations=[],helpUsedForCurrent=false,answered=false,questionCount=30,gameStartTime=null,gameEndTime=null,answersHistory=[];
+        function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+        function normalizeCity(c){return c.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[-\s]/g,"").trim();}
+        function createConfetti(){const c=document.getElementById('confettiContainer');c.innerHTML='';const colors=['#10B981','#F59E0B','#FF6B35','#3B82F6','#8B5CF6'],shapes=['●','■','▲','★'];for(let i=0;i<30;i++){const d=document.createElement('div');d.className='confetti';d.textContent=shapes[Math.floor(Math.random()*shapes.length)];d.style.left=Math.random()*100+'%';d.style.color=colors[Math.floor(Math.random()*colors.length)];d.style.fontSize=(Math.random()*10+8)+'px';d.style.animation=`confettiFall ${Math.random()*1+1.5}s ease-out forwards`;d.style.animationDelay=Math.random()*0.3+'s';c.appendChild(d);}setTimeout(()=>{c.innerHTML='';},2500);}
+        function showSuccessGlow(){const g=document.getElementById('successGlow');g.classList.remove('active');void g.offsetWidth;g.classList.add('active');}
+        function showScorePopup(){const p=document.getElementById('scorePopup');p.classList.remove('active');void p.offsetWidth;p.classList.add('active');}
+        function createStarBurst(){const c=document.getElementById('starBurst');c.innerHTML='';const stars=['⭐','✨','🌟'],angles=[0,45,90,135,180,225,270,315];angles.forEach((a,i)=>{const s=document.createElement('div');s.className='star';s.textContent=stars[i%stars.length];const r=a*Math.PI/180,d=80;s.style.setProperty('--tx',Math.cos(r)*d+'px');s.style.setProperty('--ty',Math.sin(r)*d+'px');s.style.left='50%';s.style.top='50%';s.style.animation='starBurst 0.8s ease-out forwards';s.style.animationDelay=(i*0.05)+'s';c.appendChild(s);});setTimeout(()=>{c.innerHTML='';},1000);}
+        function celebrateCorrectAnswer(){createConfetti();showSuccessGlow();showScorePopup();createStarBurst();}
+        function startGame(){questionCount=parseInt(document.getElementById('questionCount').value);shuffledSituations=shuffleArray(situations).slice(0,questionCount);currentIndex=0;score=0;correctAnswers=0;errors=0;helpsUsed=0;gameStartTime=new Date();answersHistory=[];document.getElementById('startScreen').classList.add('hidden');document.getElementById('endScreen').classList.add('hidden');document.getElementById('gameScreen').classList.remove('hidden');updateDisplay();loadQuestion();}
+        function loadQuestion(){const s=shuffledSituations[currentIndex];document.getElementById('situationType').innerHTML=s.type==='export'?'📤 Export':'📥 Import';document.getElementById('situationText').textContent=s.text;document.getElementById('incoterm').value='';document.getElementById('city').value='';helpUsedForCurrent=false;answered=false;document.getElementById('submitBtn').disabled=false;document.getElementById('helpBtn').disabled=false;document.getElementById('nextBtn').classList.add('hidden');document.getElementById('feedback').classList.add('hidden');updateProgress();}
+        function updateDisplay(){document.getElementById('currentScore').textContent=score;document.getElementById('correctCount').textContent=correctAnswers;document.getElementById('errorCount').textContent=errors;const e=document.getElementById('currentScore');e.className='score-value';if(score>0)e.classList.add('positive');else if(score<0)e.classList.add('negative');}
+        function updateProgress(){document.getElementById('currentQuestion').textContent=currentIndex+1;document.getElementById('totalQuestions').textContent=shuffledSituations.length;const p=Math.round((currentIndex/shuffledSituations.length)*100);document.getElementById('progressPercent').textContent=p+'%';document.getElementById('progressFill').style.width=p+'%';}
+        function showHelp(){if(helpUsedForCurrent||answered)return;helpUsedForCurrent=true;helpsUsed++;score-=2;updateDisplay();const s=shuffledSituations[currentIndex],f=document.getElementById('feedback');f.className='feedback help';f.innerHTML=`<div class="feedback-header"><span class="feedback-icon">💡</span>Indice (-2 points)</div><div class="feedback-text">${s.hint}</div>`;f.classList.remove('hidden');document.getElementById('helpBtn').disabled=true;}
+        function submitAnswer(){if(answered)return;const si=document.getElementById('incoterm').value,ci=document.getElementById('city').value.trim();if(!si||!ci){alert('Veuillez sélectionner un Incoterm et entrer une ville.');return;}answered=true;const s=shuffledSituations[currentIndex],f=document.getElementById('feedback'),ic=si===s.incoterm,cc=normalizeCity(ci)===normalizeCity(s.city),ok=ic&&cc;answersHistory.push({questionNum:currentIndex+1,type:s.type,expectedIncoterm:s.incoterm,expectedCity:s.city,givenIncoterm:si,givenCity:ci,isCorrect:ok,usedHelp:helpUsedForCurrent});if(ok){score+=5;correctAnswers++;celebrateCorrectAnswer();f.className='feedback correct';f.innerHTML=`<div class="feedback-header"><span class="feedback-icon">✅</span>Excellente réponse ! (+5 points)</div><div class="feedback-text">${s.explanation}</div>`;}else{score-=3;errors++;let d='';if(!ic&&!cc)d="L'Incoterm et la ville sont incorrects.";else if(!ic)d=`L'Incoterm est incorrect (vous avez mis ${si}).`;else d=`La ville est incorrecte (vous avez mis ${ci}).`;f.className='feedback incorrect';f.innerHTML=`<div class="feedback-header"><span class="feedback-icon">❌</span>Réponse incorrecte (-3 points)</div><div class="feedback-text">${d}</div><div class="correct-answer">✓ Bonne réponse : ${s.incoterm} ${s.city}</div><div class="feedback-text" style="margin-top:1rem;">${s.explanation}</div>`;}f.classList.remove('hidden');updateDisplay();document.getElementById('submitBtn').disabled=true;document.getElementById('helpBtn').disabled=true;document.getElementById('nextBtn').classList.remove('hidden');}
+        function nextQuestion(){currentIndex++;if(currentIndex>=shuffledSituations.length)endGame();else loadQuestion();}
+        function endGame(){gameEndTime=new Date();document.getElementById('gameScreen').classList.add('hidden');document.getElementById('endScreen').classList.remove('hidden');document.getElementById('finalScore').textContent=score+' pts';document.getElementById('finalCorrect').textContent=correctAnswers;document.getElementById('finalErrors').textContent=errors;document.getElementById('finalHelps').textContent=helpsUsed;const p=(correctAnswers/shuffledSituations.length)*100,g=document.getElementById('gradeBadge'),m=document.getElementById('finalMessage');if(p>=90){g.className='grade-badge grade-excellent';g.textContent='🏆 Expert Incoterms';m.textContent='Félicitations ! Vous maîtrisez parfaitement les Incoterms 2020 !';}else if(p>=70){g.className='grade-badge grade-good';g.textContent='⭐ Très bien';m.textContent='Bravo ! Vous avez une bonne maîtrise des Incoterms.';}else if(p>=50){g.className='grade-badge grade-average';g.textContent='📚 En progression';m.textContent='Continuez vos révisions pour consolider vos acquis.';}else{g.className='grade-badge grade-poor';g.textContent='📖 À réviser';m.textContent='Reprenez les bases des Incoterms 2020 et réessayez !';}}
+        function restartGame(){document.getElementById('endScreen').classList.add('hidden');document.getElementById('startScreen').classList.remove('hidden');}
+        function saveGame(){const d={version:"1.0",saveDate:new Date().toISOString(),gameState:{currentIndex,score,correctAnswers,errors,helpsUsed,questionCount,gameStartTime:gameStartTime?gameStartTime.toISOString():null,helpUsedForCurrent,answered},shuffledSituations,answersHistory};const j=JSON.stringify(d,null,2),b=new Blob([j],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=`Quiz_Incoterms_Sauvegarde_${new Date().toISOString().slice(0,10)}_${new Date().toTimeString().slice(0,5).replace(':','-')}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);alert('✅ Partie sauvegardée avec succès !\n\nVous pouvez reprendre cette partie plus tard en chargeant ce fichier.');}
+        function triggerLoadFile(){document.getElementById('loadFileInput').click();}
+        function handleLoadFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d.version||!d.gameState||!d.shuffledSituations)throw new Error('Format invalide');currentIndex=d.gameState.currentIndex;score=d.gameState.score;correctAnswers=d.gameState.correctAnswers;errors=d.gameState.errors;helpsUsed=d.gameState.helpsUsed;questionCount=d.gameState.questionCount;gameStartTime=d.gameState.gameStartTime?new Date(d.gameState.gameStartTime):new Date();helpUsedForCurrent=d.gameState.helpUsedForCurrent||false;answered=d.gameState.answered||false;shuffledSituations=d.shuffledSituations;answersHistory=d.answersHistory||[];document.getElementById('startScreen').classList.add('hidden');document.getElementById('endScreen').classList.add('hidden');document.getElementById('gameScreen').classList.remove('hidden');updateDisplay();loadQuestion();if(answered&&currentIndex<shuffledSituations.length){document.getElementById('submitBtn').disabled=true;document.getElementById('helpBtn').disabled=true;document.getElementById('nextBtn').classList.remove('hidden');}alert(`✅ Partie chargée avec succès !\n\nQuestion ${currentIndex+1}/${shuffledSituations.length}\nScore actuel : ${score} points`);}catch(err){alert('❌ Erreur lors du chargement de la sauvegarde.\n\nVérifiez que le fichier est valide.');console.error('Load error:',err);}};r.readAsText(f);e.target.value='';}
+        function openPdfModal(){document.getElementById('pdfModal').classList.remove('hidden');document.getElementById('studentLastName').focus();}
+        function closePdfModal(){document.getElementById('pdfModal').classList.add('hidden');}
+        function generatePDF(){const ln=document.getElementById('studentLastName').value.trim(),fn=document.getElementById('studentFirstName').value.trim(),sc=document.getElementById('studentClass').value.trim();if(!ln||!fn||!sc){alert('Veuillez remplir tous les champs obligatoires.');return;}const{jsPDF}=window.jspdf,doc=new jsPDF(),pct=Math.round((correctAnswers/shuffledSituations.length)*100);let gr='',gc=[0,0,0];if(pct>=90){gr='Expert Incoterms';gc=[16,185,129];}else if(pct>=70){gr='Tres bien';gc=[59,130,246];}else if(pct>=50){gr='En progression';gc=[245,158,11];}else{gr='A reviser';gc=[239,68,68];}const dur=Math.round((gameEndTime-gameStartTime)/1000/60),durT=dur<1?"moins d'1 minute":`${dur} minute${dur>1?'s':''}`,dateStr=gameEndTime.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+            doc.setFillColor(26,26,46);doc.rect(0,0,210,45,'F');doc.setFillColor(255,107,53);doc.rect(0,45,210,2,'F');doc.setTextColor(255,255,255);doc.setFontSize(22);doc.setFont('helvetica','bold');doc.text('ATTESTATION DE RESULTATS',105,22,{align:'center'});doc.setFontSize(12);doc.setFont('helvetica','normal');doc.text('Quiz Incoterms 2020 - BTS Commerce International',105,35,{align:'center'});
+            doc.setTextColor(60,60,60);doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text('INFORMATIONS ETUDIANT',20,60);doc.setDrawColor(200,200,200);doc.line(20,63,190,63);doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text(`Nom : ${ln.toUpperCase()}`,20,72);doc.text(`Prenom : ${fn}`,105,72);doc.text(`Classe : ${sc}`,20,80);doc.text(`Date : ${dateStr}`,105,80);doc.text(`Duree : ${durT}`,20,88);
+            doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text('RESULTATS',20,102);doc.line(20,105,190,105);doc.setFillColor(245,245,245);doc.roundedRect(20,110,170,35,3,3,'F');doc.setFillColor(...gc);doc.roundedRect(25,115,45,15,2,2,'F');doc.setTextColor(255,255,255);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text(gr,47.5,124,{align:'center'});doc.setTextColor(255,107,53);doc.setFontSize(24);doc.text(`${score} pts`,115,128,{align:'center'});doc.setTextColor(100,100,100);doc.setFontSize(11);doc.text(`${pct}% de reussite`,165,128,{align:'center'});doc.setFontSize(9);doc.setTextColor(80,80,80);doc.text(`${correctAnswers} bonnes reponses`,25,140);doc.text(`${errors} erreurs`,80,140);doc.text(`${helpsUsed} aides`,120,140);doc.text(`${shuffledSituations.length} questions`,155,140);
+            doc.setTextColor(60,60,60);doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text('DETAIL DES REPONSES',20,158);doc.line(20,161,190,161);const tsY=166;doc.setFillColor(26,26,46);doc.rect(20,tsY,170,8,'F');doc.setTextColor(255,255,255);doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('N°',24,tsY+5.5);doc.text('Type',35,tsY+5.5);doc.text('Reponse attendue',58,tsY+5.5);doc.text('Votre reponse',110,tsY+5.5);doc.text('Aide',155,tsY+5.5);doc.text('Statut',172,tsY+5.5);
+            doc.setFont('helvetica','normal');let cY=tsY+8;const rH=7,maxR1=14;answersHistory.slice(0,maxR1).forEach((a,i)=>{if(i%2===0){doc.setFillColor(250,250,250);doc.rect(20,cY,170,rH,'F');}doc.setTextColor(60,60,60);doc.setFontSize(7);doc.text(String(a.questionNum),24,cY+5);doc.text(a.type==='export'?'EXP':'IMP',35,cY+5);doc.text(`${a.expectedIncoterm} ${a.expectedCity}`,58,cY+5);doc.text(`${a.givenIncoterm} ${a.givenCity}`.substring(0,25),110,cY+5);doc.text(a.usedHelp?'Oui':'-',158,cY+5);if(a.isCorrect){doc.setFillColor(16,185,129);doc.roundedRect(168,cY+1.5,18,4,1,1,'F');doc.setTextColor(255,255,255);doc.setFontSize(6);doc.text('CORRECT',177,cY+4.5,{align:'center'});}else{doc.setFillColor(239,68,68);doc.roundedRect(168,cY+1.5,18,4,1,1,'F');doc.setTextColor(255,255,255);doc.setFontSize(6);doc.text('FAUX',177,cY+4.5,{align:'center'});}cY+=rH;});
+            doc.setFillColor(26,26,46);doc.rect(0,287,210,10,'F');doc.setTextColor(255,255,255);doc.setFontSize(7);doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International',105,293,{align:'center'});doc.text('Page 1/'+(answersHistory.length>maxR1?'2':'1'),190,293);
+            if(answersHistory.length>maxR1){doc.addPage();doc.setFillColor(26,26,46);doc.rect(0,0,210,25,'F');doc.setFillColor(255,107,53);doc.rect(0,25,210,2,'F');doc.setTextColor(255,255,255);doc.setFontSize(14);doc.setFont('helvetica','bold');doc.text('DETAIL DES REPONSES (suite)',105,16,{align:'center'});doc.setTextColor(100,100,100);doc.setFontSize(9);doc.setFont('helvetica','normal');doc.text(`${fn} ${ln.toUpperCase()} - ${sc}`,20,38);const t2Y=45;doc.setFillColor(26,26,46);doc.rect(20,t2Y,170,8,'F');doc.setTextColor(255,255,255);doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('N°',24,t2Y+5.5);doc.text('Type',35,t2Y+5.5);doc.text('Reponse attendue',58,t2Y+5.5);doc.text('Votre reponse',110,t2Y+5.5);doc.text('Aide',155,t2Y+5.5);doc.text('Statut',172,t2Y+5.5);doc.setFont('helvetica','normal');cY=t2Y+8;answersHistory.slice(maxR1).forEach((a,i)=>{if(i%2===0){doc.setFillColor(250,250,250);doc.rect(20,cY,170,rH,'F');}doc.setTextColor(60,60,60);doc.setFontSize(7);doc.text(String(a.questionNum),24,cY+5);doc.text(a.type==='export'?'EXP':'IMP',35,cY+5);doc.text(`${a.expectedIncoterm} ${a.expectedCity}`,58,cY+5);doc.text(`${a.givenIncoterm} ${a.givenCity}`.substring(0,25),110,cY+5);doc.text(a.usedHelp?'Oui':'-',158,cY+5);if(a.isCorrect){doc.setFillColor(16,185,129);doc.roundedRect(168,cY+1.5,18,4,1,1,'F');doc.setTextColor(255,255,255);doc.setFontSize(6);doc.text('CORRECT',177,cY+4.5,{align:'center'});}else{doc.setFillColor(239,68,68);doc.roundedRect(168,cY+1.5,18,4,1,1,'F');doc.setTextColor(255,255,255);doc.setFontSize(6);doc.text('FAUX',177,cY+4.5,{align:'center'});}cY+=rH;});cY+=10;doc.setFillColor(245,245,245);doc.roundedRect(20,cY,170,25,3,3,'F');doc.setTextColor(60,60,60);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('RECAPITULATIF',105,cY+8,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(16,185,129);doc.text(`Reponses correctes: ${correctAnswers}/${shuffledSituations.length} (${pct}%)`,30,cY+18);doc.setTextColor(239,68,68);doc.text(`Erreurs: ${errors}`,100,cY+18);doc.setTextColor(245,158,11);doc.text(`Aides: ${helpsUsed}`,140,cY+18);doc.setFillColor(26,26,46);doc.rect(0,287,210,10,'F');doc.setTextColor(255,255,255);doc.setFontSize(7);doc.text('Christian S 2025 - Quiz Incoterms 2020 - BTS Commerce International',105,293,{align:'center'});doc.text('Page 2/2',190,293);}
+            doc.save(`Quiz_Incoterms_${ln.toUpperCase()}_${fn}_${new Date().toISOString().slice(0,10)}.pdf`);closePdfModal();}
+        document.getElementById('pdfModal').addEventListener('click',function(e){if(e.target===this)closePdfModal();});
+        document.addEventListener('keydown',function(e){if(e.key==='Escape')closePdfModal();});
     </script>
 </body>
 </html>
-
